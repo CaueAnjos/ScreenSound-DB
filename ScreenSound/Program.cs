@@ -17,7 +17,8 @@ opcoes.Add(-1, new MenuSair());
 
 void ExibirLogo()
 {
-    Console.WriteLine(@"
+    Console.WriteLine(
+        @"
 
 ░██████╗░█████╗░██████╗░███████╗███████╗███╗░░██╗  ░██████╗░█████╗░██╗░░░██╗███╗░░██╗██████╗░
 ██╔════╝██╔══██╗██╔══██╗██╔════╝██╔════╝████╗░██║  ██╔════╝██╔══██╗██║░░░██║████╗░██║██╔══██╗
@@ -25,7 +26,8 @@ void ExibirLogo()
 ░╚═══██╗██║░░██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║  ░╚═══██╗██║░░██║██║░░░██║██║╚████║██║░░██║
 ██████╔╝╚█████╔╝██║░░██║███████╗███████╗██║░╚███║  ██████╔╝╚█████╔╝╚██████╔╝██║░╚███║██████╔╝
 ╚═════╝░░╚════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝  ╚═════╝░░╚════╝░░╚═════╝░╚═╝░░╚══╝╚═════╝░
-");
+"
+    );
     Console.WriteLine("Boas vindas ao Screen Sound 3.0!");
 }
 
@@ -46,8 +48,9 @@ void ExibirOpcoesDoMenu()
     {
         Menu menuASerExibido = opcoes[opcaoEscolhidaNumerica];
         menuASerExibido.Executar(artistasRegistrados);
-        if (opcaoEscolhidaNumerica > 0) ExibirOpcoesDoMenu();
-    } 
+        if (opcaoEscolhidaNumerica > 0)
+            ExibirOpcoesDoMenu();
+    }
     else
     {
         Console.WriteLine("Opção inválida");
@@ -55,3 +58,4 @@ void ExibirOpcoesDoMenu()
 }
 
 ExibirOpcoesDoMenu();
+

@@ -13,7 +13,6 @@ internal class Musica
     public void ExibirFichaTecnica()
     {
         Console.WriteLine($"Nome: {Nome}");
-      
     }
 
     public override string ToString()
@@ -22,3 +21,4 @@ internal class Musica
         Nome: {Nome}";
     }
 }
+
