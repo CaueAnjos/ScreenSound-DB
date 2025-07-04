@@ -1,6 +1,11 @@
 ﻿using ScreenSound.Menus;
 using ScreenSound.Modelos;
 
+using var conexao = ScreenSound.Banco.Conection.Conectar();
+Console.WriteLine(conexao.State);
+
+return;
+
 Artista ira = new Artista("Ira!", "Banda Ira!");
 Artista beatles = new("The Beatles", "Banda The Beatles");
 
