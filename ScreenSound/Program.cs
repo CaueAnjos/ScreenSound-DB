@@ -1,8 +1,11 @@
-﻿using ScreenSound.Menus;
+﻿using ScreenSound.Banco;
+using ScreenSound.Menus;
 using ScreenSound.Modelos;
 
-using var conexao = ScreenSound.Banco.Conection.Conectar();
-Console.WriteLine(conexao.State);
+foreach (var artista in Conection.ObterArtistas())
+{
+    Console.WriteLine(artista);
+}
 
 return;
 
