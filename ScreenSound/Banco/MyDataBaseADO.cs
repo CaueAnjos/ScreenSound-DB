@@ -107,4 +107,14 @@ internal class MyDataBaseADO : IMyDataBase
         int rowsEffected = comando.ExecuteNonQuery();
         return rowsEffected > 0;
     }
+
+    public bool AdicionarMusica(Musica musica)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IEnumerable<Musica> ObterMusicas()
+    {
+        throw new NotImplementedException();
+    }
 }

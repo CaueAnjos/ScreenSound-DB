@@ -12,7 +12,12 @@ internal interface IMyDataBase
     bool RemoverArtista(int id);
 
     bool MudarArtista(int id, Artista artista);
+
     // bool MudarFotoPerfil(int id, string fotoPerfil);
     // bool MudarNome(int id, string nome);
     // bool MudarBio(int id, string bio);
+
+    bool AdicionarMusica(Musica musica);
+
+    IEnumerable<Musica> ObterMusicas();
 }

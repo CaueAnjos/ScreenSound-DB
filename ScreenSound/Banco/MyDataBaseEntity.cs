@@ -6,6 +6,7 @@ namespace ScreenSound.Banco;
 internal class EntityContext : DbContext
 {
     public DbSet<Artista> Artistas { get; set; }
+    public DbSet<Musica> Musicas { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -27,6 +28,13 @@ internal class MyDataBaseEntity : IMyDataBase
     public bool AdicionarArtista(Artista artista)
     {
         Context.Artistas.Add(artista);
+        Context.Musicas.AddRange(artista.Musicas);
+        return Context.SaveChanges() > 0;
+    }
+
+    public bool AdicionarMusica(Musica musica)
+    {
+        Context.Musicas.Add(musica);
         return Context.SaveChanges() > 0;
     }
 
@@ -50,6 +58,11 @@ internal class MyDataBaseEntity : IMyDataBase
     public IEnumerable<Artista> ObterArtistas()
     {
         return Context.Artistas;
+    }
+
+    public IEnumerable<Musica> ObterMusicas()
+    {
+        return Context.Musicas;
     }
 
     public bool RemoverArtista(int id)

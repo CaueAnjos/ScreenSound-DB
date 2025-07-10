@@ -23,6 +23,11 @@ internal class MyDataBaseDapper : IMyDataBase
         return Connection.Execute(sql, artista) > 0;
     }
 
+    public bool AdicionarMusica(Musica musica)
+    {
+        throw new NotImplementedException();
+    }
+
     public bool MudarArtista(int id, Artista artista)
     {
         string sql =
@@ -40,6 +45,11 @@ internal class MyDataBaseDapper : IMyDataBase
     {
         string sql = "SELECT ID, Nome, Bio, FotoPerfil FROM Artistas";
         return Connection.Query<Artista>(sql);
+    }
+
+    public IEnumerable<Musica> ObterMusicas()
+    {
+        throw new NotImplementedException();
     }
 
     public bool RemoverArtista(int id)
