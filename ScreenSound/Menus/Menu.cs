@@ -13,7 +13,7 @@ internal class Menu
         Console.WriteLine(asteriscos + "\n");
     }
 
-    public virtual void Executar(Dictionary<string, Artista> nusicasRegistradas)
+    public virtual void Executar(Banco.IMyDataBase db)
     {
         Console.Clear();
     }

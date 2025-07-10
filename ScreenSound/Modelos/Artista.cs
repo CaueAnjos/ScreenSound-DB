@@ -11,6 +11,14 @@ internal class Artista
         FotoPerfil = "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png";
     }
 
+    public Artista()
+    {
+        Nome = string.Empty;
+        Bio = string.Empty;
+        FotoPerfil = "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png";
+        Id = 0;
+    }
+
     public string Nome { get; set; }
     public string FotoPerfil { get; set; }
     public string Bio { get; set; }
@@ -38,4 +46,3 @@ internal class Artista
             Bio: {Bio}";
     }
 }
-
