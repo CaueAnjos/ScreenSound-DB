@@ -16,7 +16,7 @@ internal class EntityContext : DbContext
     }
 }
 
-internal class MyDataBaseEntity : IMyDataBase
+internal class MyDataBaseEntity : IDal
 {
     public MyDataBaseEntity(EntityContext context)
     {

@@ -11,7 +11,7 @@ internal interface IDao<T>
     void Update(T entity);
 }
 
-internal interface IMyDataBase
+internal interface IDal
 {
     IDao<Artista> Artistas { get; }
     IDao<Musica> Musicas { get; }

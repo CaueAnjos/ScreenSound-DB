@@ -6,7 +6,7 @@ Artista ira = new Artista("Ira!", "Banda Ira!");
 Artista beatles = new("The Beatles", "Banda The Beatles");
 
 using EntityContext context = new();
-IMyDataBase artistasRegistrados = new MyDataBaseEntity(context);
+IDal artistasRegistrados = new MyDataBaseEntity(context);
 
 Dictionary<int, Menu> opcoes = new();
 opcoes.Add(1, new MenuRegistrarArtista());

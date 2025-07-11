@@ -13,7 +13,7 @@ internal class Menu
         Console.WriteLine(asteriscos + "\n");
     }
 
-    public virtual void Executar(Banco.IMyDataBase db)
+    public virtual void Executar(Banco.IDal db)
     {
         Console.Clear();
     }
