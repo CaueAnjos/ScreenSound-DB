@@ -35,9 +35,9 @@ void ExibirOpcoesDoMenu()
 {
     ExibirLogo();
     Console.WriteLine("\nDigite 1 para registrar um artista");
-    Console.WriteLine("Digite 2 para registrar a música de um artista");
+    Console.WriteLine("Digite 2 para registrar a música");
     Console.WriteLine("Digite 3 para mostrar todos os artistas");
-    Console.WriteLine("Digite 4 para exibir todas as músicas de um artista");
+    Console.WriteLine("Digite 4 para exibir todas as músicas");
     Console.WriteLine("Digite -1 para sair");
 
     Console.Write("\nDigite a sua opção: ");

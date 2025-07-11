@@ -4,13 +4,12 @@ namespace ScreenSound.Menus;
 
 internal class MenuMostrarMusicas : Menu
 {
-    public override void Executar(Banco.IDal artistasRegistrados)
+    public override void Executar(Banco.IDal dal)
     {
-        base.Executar(artistasRegistrados);
-        ExibirTituloDaOpcao("Exibir detalhes do artista");
+        base.Executar(dal);
+        ExibirTituloDaOpcao("Exibir todas as musicas");
 
-        Console.WriteLine("\nDiscografia:");
-        foreach (var musica in artistasRegistrados.ObterMusicas())
+        foreach (Musica musica in dal.Musicas.GetAll())
         {
             Console.WriteLine(musica);
         }

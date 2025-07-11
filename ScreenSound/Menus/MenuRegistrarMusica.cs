@@ -4,23 +4,16 @@ namespace ScreenSound.Menus;
 
 internal class MenuRegistrarMusica : Menu
 {
-    public override void Executar(Banco.IDal artistasRegistrados)
+    public override void Executar(Banco.IDal dal)
     {
-        base.Executar(artistasRegistrados);
+        base.Executar(dal);
         ExibirTituloDaOpcao("Registro de músicas");
 
         Console.Write("Agora digite o título da música: ");
         string tituloDaMusica = Console.ReadLine()!;
-        artistasRegistrados.AdicionarMusica(new Musica(tituloDaMusica));
+        dal.Musicas.Add(new Musica(tituloDaMusica));
         Console.WriteLine($"A música {tituloDaMusica} foi registrada com sucesso!");
         Thread.Sleep(4000);
         Console.Clear();
-        // else
-        // {
-        //     Console.WriteLine($"\nO artista {nomeDoArtista} não foi encontrado!");
-        //     Console.WriteLine("Digite uma tecla para voltar ao menu principal");
-        //     Console.ReadKey();
-        //     Console.Clear();
-        // }
     }
 }
