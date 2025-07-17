@@ -17,8 +17,8 @@ internal class MenuRegistrarMusica : Menu
 
         Musica musica = new Musica(tituloDaMusica);
         musica.Artista = dal.Artistas.Get(a => a.Nome == artistaNome);
+        dal.Musicas.Add(musica);
 
-        dal.Musicas.Add(new Musica(tituloDaMusica));
         Console.WriteLine($"A música {tituloDaMusica} foi registrada com sucesso!");
         Thread.Sleep(4000);
         Console.Clear();
