@@ -20,6 +20,7 @@ internal class Musica
     public override string ToString()
     {
         return @$"Id: {Id}
-        Nome: {Nome}";
+        Nome: {Nome}
+        Artista: {Artista?.Nome}";
     }
 }
