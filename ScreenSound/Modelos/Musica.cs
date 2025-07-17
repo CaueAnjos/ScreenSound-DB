@@ -9,6 +9,7 @@ internal class Musica
 
     public string Nome { get; set; }
     public int Id { get; set; }
+    public Artista? Artista { get; set; }
     public DateTime DataLancamento { get; set; } = DateTime.Today;
 
     public void ExibirFichaTecnica()
