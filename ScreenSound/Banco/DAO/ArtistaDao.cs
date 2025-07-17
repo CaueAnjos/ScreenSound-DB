@@ -17,6 +17,11 @@ internal class ArtistaDao(EntityContext context) : IDao<Artista>
         return _context.Artistas;
     }
 
+    public Artista Get(Func<Artista, bool> condition)
+    {
+        return _context.Artistas.Single(condition);
+    }
+
     public Artista GetById(int id)
     {
         return _context.Artistas.Single(a => a.Id == id);
