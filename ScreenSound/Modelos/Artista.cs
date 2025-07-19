@@ -27,6 +27,7 @@ internal class Artista
     public void AdicionarMusica(Musica musica)
     {
         Musicas.Add(musica);
+        musica.Artista = this;
     }
 
     public void ExibirDiscografia()
