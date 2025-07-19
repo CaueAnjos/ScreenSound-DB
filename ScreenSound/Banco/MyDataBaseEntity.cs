@@ -12,9 +12,11 @@ internal class EntityContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer(
-            "Server=localhost,1433;Database=master;User Id=sa;Password=[Senha123];TrustServerCertificate=True;"
-        );
+        optionsBuilder
+            .UseSqlServer(
+                "Server=localhost,1433;Database=master;User Id=sa;Password=[Senha123];TrustServerCertificate=True;"
+            )
+            .UseLazyLoadingProxies();
     }
 }
 

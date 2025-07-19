@@ -1,8 +1,8 @@
 ﻿namespace ScreenSound.Modelos;
 
-internal class Artista
+public class Artista
 {
-    public List<Musica> Musicas = new List<Musica>();
+    public virtual List<Musica> Musicas { get; set; } = [];
 
     public Artista(string nome, string bio)
     {
