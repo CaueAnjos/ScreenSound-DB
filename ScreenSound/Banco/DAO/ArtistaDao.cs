@@ -17,7 +17,7 @@ internal class ArtistaDao(EntityContext context) : IDao<Artista>
         return _context.Artistas;
     }
 
-    public Artista Get(Func<Artista, bool> condition)
+    public Artista GetSingle(Func<Artista, bool> condition)
     {
         return _context.Artistas.Single(condition);
     }
@@ -37,5 +37,10 @@ internal class ArtistaDao(EntityContext context) : IDao<Artista>
     {
         _context.Artistas.Update(artista);
         _context.SaveChanges();
+    }
+
+    public IEnumerable<Artista> GetAllWith(Func<Artista, bool> condition)
+    {
+        return _context.Artistas.Where(condition);
     }
 }

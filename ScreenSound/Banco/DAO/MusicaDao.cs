@@ -17,7 +17,7 @@ internal class MusicaDao(EntityContext context) : IDao<Musica>
         return _context.Musicas;
     }
 
-    public Musica Get(Func<Musica, bool> condition)
+    public Musica GetSingle(Func<Musica, bool> condition)
     {
         return _context.Musicas.Single(condition);
     }
@@ -37,5 +37,10 @@ internal class MusicaDao(EntityContext context) : IDao<Musica>
     {
         _context.Musicas.Update(musica);
         _context.SaveChanges();
+    }
+
+    public IEnumerable<Musica> GetAllWith(Func<Musica, bool> condition)
+    {
+        return _context.Musicas.Where(condition);
     }
 }
