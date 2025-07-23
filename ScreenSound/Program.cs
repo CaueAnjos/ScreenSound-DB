@@ -13,6 +13,7 @@ opcoes.Add(1, new MenuRegistrarArtista());
 opcoes.Add(2, new MenuRegistrarMusica());
 opcoes.Add(3, new MenuMostrarArtistas());
 opcoes.Add(4, new MenuMostrarMusicas());
+opcoes.Add(5, new MenuMostrarMusicasPorData());
 opcoes.Add(-1, new MenuSair());
 
 void ExibirLogo()
@@ -38,6 +39,7 @@ void ExibirOpcoesDoMenu()
     Console.WriteLine("Digite 2 para registrar a música");
     Console.WriteLine("Digite 3 para mostrar todos os artistas");
     Console.WriteLine("Digite 4 para exibir todas as músicas");
+    Console.WriteLine("Digite 5 para exibir todas as músicas em uma data");
     Console.WriteLine("Digite -1 para sair");
 
     Console.Write("\nDigite a sua opção: ");
