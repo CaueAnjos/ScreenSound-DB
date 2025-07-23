@@ -9,7 +9,7 @@ internal class MenuMostrarMusicas : Menu
         base.Executar(dal);
         ExibirTituloDaOpcao("Exibir todas as musicas");
 
-        foreach (Musica musica in dal.Musicas.GetAll())
+        foreach (Musica musica in dal.Musicas.GetAll().ToList())
         {
             Console.WriteLine(musica);
         }
