@@ -1,10 +1,11 @@
-﻿using ScreenSound.Modelos;
+using ScreenSoundCore.Banco;
+using ScreenSoundCore.Modelos;
 
 namespace ScreenSound.Menus;
 
 internal class MenuMostrarArtistas : Menu
 {
-    public override void Executar(Banco.IDal dal)
+    public override void Executar(IDal dal)
     {
         base.Executar(dal);
         ExibirTituloDaOpcao("Exibindo todos os artistas registrados em nossa aplicação");

@@ -1,6 +1,6 @@
-namespace ScreenSound.Banco.Dao;
+namespace ScreenSoundCore.Banco.Dao;
 
-internal interface IDao<T>
+public interface IDao<T>
 {
     IEnumerable<T> GetAll();
     T GetById(int id);

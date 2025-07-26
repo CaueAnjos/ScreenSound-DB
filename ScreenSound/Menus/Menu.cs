@@ -1,4 +1,4 @@
-﻿using ScreenSound.Modelos;
+using ScreenSoundCore.Banco;
 
 namespace ScreenSound.Menus;
 
@@ -13,7 +13,7 @@ internal class Menu
         Console.WriteLine(asteriscos + "\n");
     }
 
-    public virtual void Executar(Banco.IDal db)
+    public virtual void Executar(IDal db)
     {
         Console.Clear();
     }

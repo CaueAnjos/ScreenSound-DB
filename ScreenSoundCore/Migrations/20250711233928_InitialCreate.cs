@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace ScreenSound.Migrations
+namespace ScreenSoundCore.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration

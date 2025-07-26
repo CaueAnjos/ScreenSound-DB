@@ -1,10 +1,11 @@
-﻿using ScreenSound.Modelos;
+using ScreenSoundCore.Banco;
+using ScreenSoundCore.Modelos;
 
 namespace ScreenSound.Menus;
 
 internal class MenuMostrarMusicas : Menu
 {
-    public override void Executar(Banco.IDal dal)
+    public override void Executar(IDal dal)
     {
         base.Executar(dal);
         ExibirTituloDaOpcao("Exibir todas as musicas");

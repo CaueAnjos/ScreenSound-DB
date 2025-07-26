@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using ScreenSound.Banco.Dao;
-using ScreenSound.Modelos;
+using ScreenSoundCore.Banco.Dao;
+using ScreenSoundCore.Modelos;
 
-namespace ScreenSound.Banco;
+namespace ScreenSoundCore.Banco;
 
-internal class EntityContext : DbContext
+public class EntityContext : DbContext
 {
 #nullable disable
     public DbSet<Artista> Artistas { get; set; }
@@ -20,7 +20,7 @@ internal class EntityContext : DbContext
     }
 }
 
-internal class MyDataBaseEntity : IDal
+public class MyDataBaseEntity : IDal
 {
     public MyDataBaseEntity(EntityContext context)
     {

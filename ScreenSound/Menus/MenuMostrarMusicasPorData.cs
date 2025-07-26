@@ -1,10 +1,11 @@
-using ScreenSound.Modelos;
+using ScreenSoundCore.Banco;
+using ScreenSoundCore.Modelos;
 
 namespace ScreenSound.Menus;
 
 internal class MenuMostrarMusicasPorData : Menu
 {
-    public override void Executar(Banco.IDal db)
+    public override void Executar(IDal db)
     {
         base.Executar(db);
         ExibirTituloDaOpcao("Mosstrar Músicas por Data de Lançamento");

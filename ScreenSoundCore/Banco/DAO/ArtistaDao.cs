@@ -1,6 +1,6 @@
-using ScreenSound.Modelos;
+using ScreenSoundCore.Modelos;
 
-namespace ScreenSound.Banco.Dao;
+namespace ScreenSoundCore.Banco.Dao;
 
 internal class ArtistaDao(EntityContext context) : IDao<Artista>
 {
