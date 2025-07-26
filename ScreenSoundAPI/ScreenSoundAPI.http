@@ -1,0 +1,6 @@
+@ScreenSoundAPI_HostAddress = http://localhost:5081
+
+GET {{ScreenSoundAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

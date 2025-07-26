@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScreenSound", "ScreenSound\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenSoundCore", "ScreenSoundCore\ScreenSoundCore.csproj", "{52060F53-F116-42D3-A538-9402A4E6DBAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenSoundAPI", "ScreenSoundAPI\ScreenSoundAPI.csproj", "{AD51418A-69C5-4E6F-8FEB-C0A61ABBD55A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{52060F53-F116-42D3-A538-9402A4E6DBAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52060F53-F116-42D3-A538-9402A4E6DBAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52060F53-F116-42D3-A538-9402A4E6DBAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD51418A-69C5-4E6F-8FEB-C0A61ABBD55A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD51418A-69C5-4E6F-8FEB-C0A61ABBD55A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD51418A-69C5-4E6F-8FEB-C0A61ABBD55A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD51418A-69C5-4E6F-8FEB-C0A61ABBD55A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
