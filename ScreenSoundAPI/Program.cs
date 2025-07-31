@@ -30,7 +30,11 @@ app.MapGet(
         () =>
         {
             IDal db = app.Services.GetRequiredService<IDal>();
-            return db.Artistas.GetAll().ToArray();
+            var artistas = db.Artistas.GetAll().ToArray();
+            if (artistas is null)
+                return Results.NotFound();
+            else
+                return Results.Ok(artistas);
         }
     )
     .WithName("Artistas")
@@ -42,7 +46,10 @@ app.MapGet(
         {
             IDal db = app.Services.GetRequiredService<IDal>();
             var artista = db.Artistas.GetById(id);
-            return Results.NotFound();
+            if (artista is null)
+                return Results.NotFound();
+            else
+                return Results.Ok(artista);
         }
     )
     .WithName("ArtistaPorId")
