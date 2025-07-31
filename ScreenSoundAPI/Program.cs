@@ -11,6 +11,9 @@ builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =
     options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles
 );
 
+builder.Services.AddSingleton<EntityContext, EntityContext>();
+builder.Services.AddSingleton<IDal, MyDataBaseEntity>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -23,15 +26,26 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.MapGet(
-        "/",
+        "/Artistas",
         () =>
         {
-            EntityContext context = new();
-            IDal db = new MyDataBaseEntity(context);
+            IDal db = app.Services.GetRequiredService<IDal>();
             return db.Artistas.GetAll().ToArray();
         }
     )
-    .WithName("root")
+    .WithName("Artistas")
+    .WithOpenApi();
+
+app.MapGet(
+        "/Artistas/{id}",
+        (int id) =>
+        {
+            IDal db = app.Services.GetRequiredService<IDal>();
+            var artista = db.Artistas.GetById(id);
+            return Results.NotFound();
+        }
+    )
+    .WithName("ArtistaPorId")
     .WithOpenApi();
 
 app.Run();
