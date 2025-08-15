@@ -1,5 +1,7 @@
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc;
 using ScreenSoundCore.Banco;
+using ScreenSoundCore.Modelos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,6 +55,17 @@ app.MapGet(
         }
     )
     .WithName("ArtistaPorId")
+    .WithOpenApi();
+
+app.MapPost(
+        "/Artistas",
+        ([FromBody] Artista artista) =>
+        {
+            IDal db = app.Services.GetRequiredService<IDal>();
+            db.Artistas.Add(artista);
+        }
+    )
+    .WithName("AddArtista")
     .WithOpenApi();
 
 app.Run();
