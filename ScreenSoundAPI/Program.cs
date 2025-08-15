@@ -13,8 +13,8 @@ builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =
     options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles
 );
 
-builder.Services.AddSingleton<EntityContext, EntityContext>();
-builder.Services.AddSingleton<IDal, MyDataBaseEntity>();
+builder.Services.AddDbContext<EntityContext>();
+builder.Services.AddTransient<IDal, MyDataBaseEntity>();
 
 var app = builder.Build();
 
@@ -29,9 +29,8 @@ app.UseHttpsRedirection();
 
 app.MapGet(
         "/Artistas",
-        () =>
+        ([FromServices] IDal db) =>
         {
-            IDal db = app.Services.GetRequiredService<IDal>();
             var artistas = db.Artistas.GetAll().ToArray();
             if (artistas is null)
                 return Results.NotFound();
@@ -44,9 +43,8 @@ app.MapGet(
 
 app.MapGet(
         "/Artistas/{id}",
-        (int id) =>
+        ([FromServices] IDal db, int id) =>
         {
-            IDal db = app.Services.GetRequiredService<IDal>();
             var artista = db.Artistas.GetById(id);
             if (artista is null)
                 return Results.NotFound();
@@ -59,9 +57,8 @@ app.MapGet(
 
 app.MapPost(
         "/Artistas",
-        ([FromBody] Artista artista) =>
+        ([FromServices] IDal db, [FromBody] Artista artista) =>
         {
-            IDal db = app.Services.GetRequiredService<IDal>();
             db.Artistas.Add(artista);
         }
     )
