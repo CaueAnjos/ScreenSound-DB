@@ -82,4 +82,29 @@ app.MapDelete(
     .WithName("DeleteArtista")
     .WithOpenApi();
 
+app.MapPut(
+        "/Artistas",
+        ([FromServices] IDal db, [FromBody] Artista artista) =>
+        {
+            int id = artista.Id;
+            var artistToUpdate = db.Artistas.GetById(id);
+            if (artistToUpdate is null)
+            {
+                return Results.NotFound();
+            }
+            else
+            {
+                artistToUpdate.Musicas = artista.Musicas;
+                artistToUpdate.Nome = artista.Nome;
+                artistToUpdate.FotoPerfil = artista.FotoPerfil;
+                artistToUpdate.Bio = artista.Bio;
+
+                db.Artistas.Update(artistToUpdate);
+                return Results.Ok();
+            }
+        }
+    )
+    .WithName("UpdateArtista")
+    .WithOpenApi();
+
 app.Run();
