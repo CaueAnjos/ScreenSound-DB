@@ -5,8 +5,6 @@ using ScreenSoundCore.Modelos;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
@@ -63,6 +61,25 @@ app.MapPost(
         }
     )
     .WithName("AddArtista")
+    .WithOpenApi();
+
+app.MapDelete(
+        "/Artistas/{id}",
+        ([FromServices] IDal db, int id) =>
+        {
+            var artista = db.Artistas.GetById(id);
+            if (artista is null)
+            {
+                return Results.NotFound();
+            }
+            else
+            {
+                db.Artistas.Remove(artista);
+                return Results.NoContent();
+            }
+        }
+    )
+    .WithName("DeleteArtista")
     .WithOpenApi();
 
 app.Run();
