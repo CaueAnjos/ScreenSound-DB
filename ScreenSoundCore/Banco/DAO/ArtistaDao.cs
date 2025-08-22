@@ -17,14 +17,14 @@ internal class ArtistaDao(EntityContext context) : IDao<Artista>
         return _context.Artistas;
     }
 
-    public Artista GetSingle(Func<Artista, bool> condition)
+    public Artista? GetSingle(Func<Artista, bool> condition)
     {
-        return _context.Artistas.Single(condition);
+        return _context.Artistas.SingleOrDefault(condition);
     }
 
-    public Artista GetById(int id)
+    public Artista? GetById(int id)
     {
-        return _context.Artistas.Single(a => a.Id == id);
+        return GetSingle(a => a.Id == id);
     }
 
     public void Remove(Artista artista)
