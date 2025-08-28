@@ -23,7 +23,7 @@
         default = pkgs.mkShell {
           packages = with pkgs; [
              dotnet-ef
-             dotnetCorePackages.sdk_8_0_1xx
+             dotnetCorePackages.sdk_8_0_4xx
              docker_25
           ];
         };
