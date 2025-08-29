@@ -5,28 +5,31 @@
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
   };
 
-  outputs = { self, nixpkgs }:
-    let
-      allSystems = [
-        "x86_64-linux"
-        "aarch64-linux"
-        "x86_64-darwin"
-        "aarch64-darwin"
-      ];
+  outputs = {
+    self,
+    nixpkgs,
+  }: let
+    allSystems = [
+      "x86_64-linux"
+      "aarch64-linux"
+      "x86_64-darwin"
+      "aarch64-darwin"
+    ];
 
-      forAllSystems = f: nixpkgs.lib.genAttrs allSystems (system: f {
-        pkgs = import nixpkgs { inherit system; };
-      });
-    in
-    {
-      devShells = forAllSystems ({ pkgs }: {
-        default = pkgs.mkShell {
-          packages = with pkgs; [
-             dotnet-ef
-             dotnetCorePackages.sdk_8_0_4xx
-             docker_25
-          ];
-        };
-      });
-    };
+    forAllSystems = f:
+      nixpkgs.lib.genAttrs allSystems (system:
+        f {
+          pkgs = import nixpkgs {inherit system;};
+        });
+  in {
+    devShells = forAllSystems ({pkgs}: {
+      default = pkgs.mkShell {
+        packages = with pkgs; [
+          dotnet-ef
+          dotnet-sdk_9
+          docker_25
+        ];
+      };
+    });
+  };
 }
