@@ -25,8 +25,13 @@
     devShells = forAllSystems ({pkgs}: {
       default = pkgs.mkShell {
         packages = with pkgs; [
+          (with dotnetCorePackages;
+            combinePackages [
+              dotnetCorePackages.sdk_8_0
+              dotnetCorePackages.sdk_9_0
+            ])
+
           dotnet-ef
-          dotnet-sdk_9
           docker_25
         ];
       };
