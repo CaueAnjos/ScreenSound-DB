@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using ScreenSoundAPI.Request;
 using ScreenSoundCore.Banco;
 using ScreenSoundCore.Modelos;
 
@@ -38,9 +39,9 @@ internal static class ArtistEndpoints
 
         app.MapPost(
                 "/Artistas",
-                ([FromServices] IDal db, [FromBody] Artista artista) =>
+                ([FromServices] IDal db, [FromBody] ArtistaRequest artista) =>
                 {
-                    db.Artistas.Add(artista);
+                    db.Artistas.Add(new Artista(artista.name, artista.bio));
                 }
             )
             .WithName("AddArtista")
