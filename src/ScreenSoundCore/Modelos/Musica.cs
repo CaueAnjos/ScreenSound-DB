@@ -7,6 +7,13 @@ public class Musica
         Nome = nome;
     }
 
+    public Musica()
+    {
+        Nome = string.Empty;
+        this.Artista = null;
+        Id = 0;
+    }
+
     public string Nome { get; set; }
     public int Id { get; set; }
     public virtual Artista? Artista { get; set; }

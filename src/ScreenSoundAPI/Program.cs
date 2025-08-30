@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using Endpoints;
+using ScreenSoundAPI.endpoints;
 using ScreenSoundCore.Banco;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,5 +26,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.AddArtistEndpoints();
+app.AddMusicasEndpoints();
 
 app.Run();
