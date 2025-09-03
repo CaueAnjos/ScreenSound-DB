@@ -1,14 +1,9 @@
 {
-  description = "Example Go development environment for Zero to Nix";
-
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-  }: let
+  outputs = {nixpkgs, ...}: let
     allSystems = [
       "x86_64-linux"
       "aarch64-linux"
@@ -25,12 +20,7 @@
     devShells = forAllSystems ({pkgs}: {
       default = pkgs.mkShell {
         packages = with pkgs; [
-          (with dotnetCorePackages;
-            combinePackages [
-              sdk_8_0
-              sdk_9_0
-            ])
-
+          dotnet-sdk_8
           dotnet-ef
           docker_25
         ];
