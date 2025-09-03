@@ -17,7 +17,16 @@ internal static class MusicasEndpoints
                     if (musicas is null)
                         return Results.NotFound();
                     else
-                        return Results.Ok(musicas);
+                    {
+                        var responce = new List<MusicaResponse>();
+                        responce.EnsureCapacity(musicas.Count());
+                        foreach (var musica in musicas)
+                        {
+                            responce.Add(musica.GetResponse());
+                        }
+
+                        return Results.Ok(responce);
+                    }
                 }
             )
             .WithName("Musicas")
@@ -31,7 +40,7 @@ internal static class MusicasEndpoints
                     if (musica is null)
                         return Results.NotFound();
                     else
-                        return Results.Ok(musica);
+                        return Results.Ok(musica.GetResponse());
                 }
             )
             .WithName("MusicasPorId")

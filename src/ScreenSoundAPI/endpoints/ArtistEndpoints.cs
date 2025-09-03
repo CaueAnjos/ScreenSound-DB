@@ -17,7 +17,16 @@ internal static class ArtistEndpoints
                     if (artistas is null)
                         return Results.NotFound();
                     else
-                        return Results.Ok(artistas);
+                    {
+                        var responce = new List<ArtistaResponse>();
+                        responce.EnsureCapacity(artistas.Count());
+                        foreach (var artista in artistas)
+                        {
+                            responce.Add(artista.GetResponse());
+                        }
+
+                        return Results.Ok(responce);
+                    }
                 }
             )
             .WithName("Artistas")
@@ -31,7 +40,7 @@ internal static class ArtistEndpoints
                     if (artista is null)
                         return Results.NotFound();
                     else
-                        return Results.Ok(artista);
+                        return Results.Ok(artista.GetResponse());
                 }
             )
             .WithName("ArtistaPorId")
