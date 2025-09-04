@@ -9,6 +9,7 @@ public class EntityContext : DbContext
 #nullable disable
     public DbSet<Artista> Artistas { get; set; }
     public DbSet<Musica> Musicas { get; set; }
+    public DbSet<Genero> Genero { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -17,6 +18,11 @@ public class EntityContext : DbContext
                 "Server=localhost,1433;Database=master;User Id=sa;Password=[Senha123];TrustServerCertificate=True;"
             )
             .UseLazyLoadingProxies();
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Musica>().HasMany(c => c.Generos).WithMany(c => c.Musicas);
     }
 }
 

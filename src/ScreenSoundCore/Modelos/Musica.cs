@@ -5,6 +5,7 @@ public class Musica
     public Musica(string nome)
     {
         Nome = nome;
+        Generos = new List<Genero>();
     }
 
     public Musica()
@@ -12,12 +13,14 @@ public class Musica
         Nome = string.Empty;
         this.Artista = null;
         Id = 0;
+        Generos = new List<Genero>();
     }
 
     public string Nome { get; set; }
     public int Id { get; set; }
     public virtual Artista? Artista { get; set; }
     public DateTime DataLancamento { get; set; } = DateTime.Today;
+    public virtual ICollection<Genero> Generos { get; set; }
 
     public void ExibirFichaTecnica()
     {
