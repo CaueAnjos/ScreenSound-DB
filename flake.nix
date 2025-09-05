@@ -20,8 +20,7 @@
     devShells = forAllSystems ({pkgs}: {
       default = pkgs.mkShell {
         packages = with pkgs; [
-          dotnet-sdk_8
-          (with dotnetPackages;
+          (with dotnetCorePackages;
             combinePackages [
               sdk_8_0
               sdk_9_0
