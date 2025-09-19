@@ -48,32 +48,41 @@ internal static class MusicasEndpoints
 
         app.MapPost(
                 "/Musicas",
-                ([FromServices] IDal db, [FromBody] MusicaRequest artista) =>
+                ([FromServices] IDal db, [FromBody] MusicaRequest musica) =>
                 {
-                    db.Musicas.Add(new Musica(artista.name));
+                    var musicToAdd = new Musica(musica.Name)
+                    {
+                        Generos = [.. musica.Generos.Select(g =>
+                            new Genero()
+                            {
+                                Nome = g.Name,
+                                Descricao = g.Description,
+                            })],
+                    };
+                    db.Musicas.Add(musicToAdd);
                 }
             )
             .WithName("AddMusicas")
             .WithOpenApi();
 
         app.MapDelete(
-                "/Musicas/{id}",
-                ([FromServices] IDal db, int id) =>
-                {
-                    var musica = db.Musicas.GetById(id);
-                    if (musica is null)
+                    "/Musicas/{id}",
+                    ([FromServices] IDal db, int id) =>
                     {
-                        return Results.NotFound();
+                        var musica = db.Musicas.GetById(id);
+                        if (musica is null)
+                        {
+                            return Results.NotFound();
+                        }
+                        else
+                        {
+                            db.Musicas.Remove(musica);
+                            return Results.NoContent();
+                        }
                     }
-                    else
-                    {
-                        db.Musicas.Remove(musica);
-                        return Results.NoContent();
-                    }
-                }
-            )
-            .WithName("DeleteMusica")
-            .WithOpenApi();
+                )
+                .WithName("DeleteMusica")
+                .WithOpenApi();
 
         app.MapPut(
                 "/Musicas",
