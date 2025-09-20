@@ -43,7 +43,8 @@ internal static class ArtistEndpoints
                 "/Artistas",
                 ([FromServices] IDal db, [FromBody] ArtistaRequest artista) =>
                 {
-                    db.Artistas.Add(new Artista(artista.name, artista.bio));
+                    var artistAdded = new Artista(artista.name, artista.bio);
+                    db.Artistas.Add(artistAdded);
                 }
             )
             .WithName("AddArtista")
