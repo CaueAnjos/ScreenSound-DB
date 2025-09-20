@@ -16,17 +16,10 @@ internal static class ArtistEndpoints
                     var artistas = db.Artistas.GetAll().ToArray();
                     if (artistas is null)
                         return Results.NotFound();
-                    else
-                    {
-                        var responce = new List<ArtistaResponse>();
-                        responce.EnsureCapacity(artistas.Count());
-                        foreach (var artista in artistas)
-                        {
-                            responce.Add(artista.GetResponse());
-                        }
 
-                        return Results.Ok(responce);
-                    }
+                    var responce = artistas.Select(a => a.GetResponse()).ToArray();
+
+                    return Results.Ok(responce);
                 }
             )
             .WithName("Artistas")
