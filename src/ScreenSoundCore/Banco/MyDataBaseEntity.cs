@@ -9,7 +9,7 @@ public class EntityContext : DbContext
 #nullable disable
     public DbSet<Artista> Artistas { get; set; }
     public DbSet<Musica> Musicas { get; set; }
-    public DbSet<Genero> Genero { get; set; }
+    public DbSet<Genero> Generos { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -33,11 +33,12 @@ public class MyDataBaseEntity : IDal
         Context = context;
         Artistas = new ArtistaDao(context);
         Musicas = new MusicaDao(context);
+        Generos = new GeneroDao(context);
     }
 
     public EntityContext Context { get; set; }
 
     public IDao<Artista> Artistas { get; init; }
-
     public IDao<Musica> Musicas { get; init; }
+    public IDao<Genero> Generos { get; init; }
 }

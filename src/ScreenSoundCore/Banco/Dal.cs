@@ -7,4 +7,5 @@ public interface IDal
 {
     public IDao<Artista> Artistas { get; }
     public IDao<Musica> Musicas { get; }
+    public IDao<Genero> Generos { get; }
 }
