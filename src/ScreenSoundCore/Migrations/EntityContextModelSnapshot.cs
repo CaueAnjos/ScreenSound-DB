@@ -83,7 +83,7 @@ namespace ScreenSoundCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genero");
+                    b.ToTable("Generos");
                 });
 
             modelBuilder.Entity("ScreenSoundCore.Modelos.Musica", b =>

@@ -22,10 +22,17 @@ public static class ArtistaRequestExtations
         {
             Nome = artista.Name,
             Bio = artista.Bio,
-            Musicas = [.. artista.Musics.Select(m => m.ConvertToObject(db))]
         };
-
         db.Artistas.Add(obj);
+
+        List<Musica> musicas = [];
+        if (artista.Musics.Count > 0)
+        {
+            musicas = [.. artista.Musics.Select(m => m.ConvertToObject(db))];
+        }
+
+        obj.Musicas = musicas;
+
         return obj;
     }
 }

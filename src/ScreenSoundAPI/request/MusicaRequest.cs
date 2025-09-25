@@ -21,10 +21,17 @@ public static class MusicaRequestExtations
         obj = new Musica()
         {
             Nome = musica.Name,
-            Generos = [.. musica.Generos.Select(g => g.ConvertToObject(db))]
         };
-
         db.Musicas.Add(obj);
+
+        ICollection<Genero> generos = [];
+        if (musica.Generos.Count > 0)
+        {
+            generos = [.. musica.Generos.Select(g => g.ConvertToObject(db))];
+        }
+
+        obj.Generos = generos;
+
         return obj;
     }
 }

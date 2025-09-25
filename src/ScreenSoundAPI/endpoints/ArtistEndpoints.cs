@@ -43,8 +43,14 @@ internal static class ArtistEndpoints
                 "/Artistas",
                 ([FromServices] IDal db, [FromBody] ArtistaRequest artista) =>
                 {
-                    var artistAdded = new Artista(artista.name, artista.bio);
-                    db.Artistas.Add(artistAdded);
+                    var artistaAdded = artista.TryGetObject(db);
+                    if (artistaAdded is not null)
+                    {
+                        return Results.Conflict();
+                    }
+
+                    artista.ConvertToObject(db);
+                    return Results.Created();
                 }
             )
             .WithName("AddArtista")
