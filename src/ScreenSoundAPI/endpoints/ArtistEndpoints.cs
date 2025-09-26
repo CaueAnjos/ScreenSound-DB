@@ -62,14 +62,10 @@ internal static class ArtistEndpoints
                 {
                     var artista = db.Artistas.GetById(id);
                     if (artista is null)
-                    {
                         return Results.NotFound();
-                    }
-                    else
-                    {
-                        db.Artistas.Remove(artista);
-                        return Results.NoContent();
-                    }
+
+                    db.Artistas.Remove(artista);
+                    return Results.NoContent();
                 }
             )
             .WithName("DeleteArtista")
@@ -82,19 +78,15 @@ internal static class ArtistEndpoints
                     int id = artista.Id;
                     var artistToUpdate = db.Artistas.GetById(id);
                     if (artistToUpdate is null)
-                    {
                         return Results.NotFound();
-                    }
-                    else
-                    {
-                        artistToUpdate.Musicas = artista.Musicas;
-                        artistToUpdate.Nome = artista.Nome;
-                        artistToUpdate.FotoPerfil = artista.FotoPerfil;
-                        artistToUpdate.Bio = artista.Bio;
 
-                        db.Artistas.Update(artistToUpdate);
-                        return Results.Ok();
-                    }
+                    artistToUpdate.Musicas = artista.Musicas;
+                    artistToUpdate.Nome = artista.Nome;
+                    artistToUpdate.FotoPerfil = artista.FotoPerfil;
+                    artistToUpdate.Bio = artista.Bio;
+
+                    db.Artistas.Update(artistToUpdate);
+                    return Results.Ok();
                 }
             )
             .WithName("UpdateArtista")
