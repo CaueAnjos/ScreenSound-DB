@@ -22,7 +22,6 @@ public static class MusicaRequestExtations
         {
             Nome = musica.Name,
         };
-        db.Musicas.Add(obj);
 
         ICollection<Genero> generos = [];
         if (musica.Generos.Count > 0)
@@ -32,6 +31,7 @@ public static class MusicaRequestExtations
 
         obj.Generos = generos;
 
+        db.Musicas.Add(obj);
         return obj;
     }
 }

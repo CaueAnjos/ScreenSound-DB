@@ -23,7 +23,6 @@ public static class ArtistaRequestExtations
             Nome = artista.Name,
             Bio = artista.Bio,
         };
-        db.Artistas.Add(obj);
 
         List<Musica> musicas = [];
         if (artista.Musics.Count > 0)
@@ -33,6 +32,7 @@ public static class ArtistaRequestExtations
 
         obj.Musicas = musicas;
 
+        db.Artistas.Add(obj);
         return obj;
     }
 }
