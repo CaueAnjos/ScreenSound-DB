@@ -29,6 +29,13 @@ internal class ArtistaDao(EntityContext context) : IDao<Artista>
 
     public void Remove(Artista artista)
     {
+        //NOTE: this is used to remove all references of this artista
+        foreach (var musica in artista.Musicas)
+        {
+            musica.Artista = null;
+            _context.Musicas.Update(musica);
+        }
+
         _context.Artistas.Remove(artista);
         _context.SaveChanges();
     }
