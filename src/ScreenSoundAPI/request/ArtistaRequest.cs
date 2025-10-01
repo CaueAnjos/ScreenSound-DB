@@ -5,6 +5,9 @@ namespace ScreenSoundAPI.Request;
 
 public record ArtistaRequest(string Name, string Bio, ICollection<MusicaRequest> Musics);
 
+// NOTE: this is used for UpdateArtista endpoint 
+public record UpdateArtistaRequest(int Id, string Name, string Bio, string FotoPerfil, ICollection<MusicaRequest> Musics);
+
 public static class ArtistaRequestExtations
 {
     public static Artista? TryGetObject(this ArtistaRequest artista, IDal db)
