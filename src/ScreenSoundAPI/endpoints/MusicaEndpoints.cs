@@ -16,54 +16,46 @@ internal static class MusicasEndpoints
                     var musicas = db.Musicas.GetAll().ToArray();
                     if (musicas is null)
                         return Results.NotFound();
-                    else
-                    {
-                        var responce = new List<MusicaResponse>();
-                        responce.EnsureCapacity(musicas.Count());
-                        foreach (var musica in musicas)
-                        {
-                            responce.Add(musica.GetResponse());
-                        }
 
-                        return Results.Ok(responce);
-                    }
+                    var responce = musicas.Select(a => a.GetResponse()).ToArray();
+                    return Results.Ok(responce);
                 }
             )
             .WithName("Musicas")
             .WithOpenApi();
 
         app.MapGet(
-                "/Musicas/{id}",
-                ([FromServices] IDal db, int id) =>
-                {
-                    var musica = db.Musicas.GetById(id);
-                    if (musica is null)
-                        return Results.NotFound();
-                    else
-                        return Results.Ok(musica.GetResponse());
-                }
-            )
-            .WithName("MusicasPorId")
-            .WithOpenApi();
+                    "/Musicas/{id}",
+                    ([FromServices] IDal db, int id) =>
+                    {
+                        var musica = db.Musicas.GetById(id);
+                        if (musica is null)
+                            return Results.NotFound();
+                        else
+                            return Results.Ok(musica.GetResponse());
+                    }
+                )
+                .WithName("MusicasPorId")
+                .WithOpenApi();
 
         app.MapPost(
-                "/Musicas",
-                ([FromServices] IDal db, [FromBody] MusicaRequest musica) =>
-                {
-                    var musicToAdd = new Musica(musica.Name)
-                    {
-                        Generos = [.. musica.Generos.Select(g =>
+                        "/Musicas",
+                        ([FromServices] IDal db, [FromBody] MusicaRequest musica) =>
+                        {
+                            var musicToAdd = new Musica(musica.Name)
+                            {
+                                Generos = [.. musica.Generos.Select(g =>
                             new Genero()
                             {
                                 Nome = g.Name,
                                 Descricao = g.Description,
                             })],
-                    };
-                    db.Musicas.Add(musicToAdd);
-                }
-            )
-            .WithName("AddMusicas")
-            .WithOpenApi();
+                            };
+                            db.Musicas.Add(musicToAdd);
+                        }
+                    )
+                    .WithName("AddMusicas")
+                    .WithOpenApi();
 
         app.MapDelete(
                     "/Musicas/{id}",
@@ -71,14 +63,10 @@ internal static class MusicasEndpoints
                     {
                         var musica = db.Musicas.GetById(id);
                         if (musica is null)
-                        {
                             return Results.NotFound();
-                        }
-                        else
-                        {
-                            db.Musicas.Remove(musica);
-                            return Results.NoContent();
-                        }
+
+                        db.Musicas.Remove(musica);
+                        return Results.NoContent();
                     }
                 )
                 .WithName("DeleteMusica")
