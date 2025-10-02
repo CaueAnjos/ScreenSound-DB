@@ -30,6 +30,7 @@ public static class MusicaRequestExtations
 
         musicToUpdate.DataLancamento = request.Date != DateTime.MinValue ? request.Date : musicToUpdate.DataLancamento;
         musicToUpdate.Nome = request.Name is not null ? request.Name : musicToUpdate.Nome;
+        musicToUpdate.Generos = [.. request.Generos.Select(g => g.ConvertToObject(db))];
 
         db.Musicas.Update(musicToUpdate);
         return true;
