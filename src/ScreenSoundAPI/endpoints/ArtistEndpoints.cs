@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using ScreenSoundAPI.Request;
 using ScreenSoundCore.Banco;
-using ScreenSoundCore.Modelos;
 
-namespace Endpoints;
+namespace ScreenSoundAPI.endpoints;
 
 internal static class ArtistEndpoints
 {
