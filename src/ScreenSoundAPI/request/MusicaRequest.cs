@@ -18,7 +18,15 @@ public static class MusicaRequestExtations
             return false;
 
         var artista = db.Artistas.GetById(request.ArtistaId);
-        musicToUpdate.Artista = artista is not null ? artista : musicToUpdate.Artista;
+        if (artista is not null)
+        {
+            musicToUpdate.Artista = artista;
+            artista.AdicionarMusica(musicToUpdate);
+        }
+        else
+        {
+            musicToUpdate.Artista = musicToUpdate.Artista;
+        }
 
         musicToUpdate.DataLancamento = request.Date != DateTime.MinValue ? request.Date : musicToUpdate.DataLancamento;
 
