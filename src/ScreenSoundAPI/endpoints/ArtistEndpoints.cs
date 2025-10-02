@@ -46,8 +46,8 @@ internal static class ArtistEndpoints
                     if (artistaAdded is not null)
                         return Results.Conflict();
 
-                    artista.ConvertToObject(db);
-                    return Results.Created();
+                    artistaAdded = artista.ConvertToObject(db);
+                    return Results.Created($"/Artistas/{artistaAdded.Id}", artistaAdded);
                 }
             )
             .WithName("AddArtista")

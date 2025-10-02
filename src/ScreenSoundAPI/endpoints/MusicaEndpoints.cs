@@ -46,8 +46,8 @@ internal static class MusicasEndpoints
                             if (musicaAdded is not null)
                                 return Results.Conflict();
 
-                            musica.ConvertToObject(db);
-                            return Results.Created();
+                            musicaAdded = musica.ConvertToObject(db);
+                            return Results.Created($"/Musicas/{musicaAdded.Id}", musicaAdded);
                         }
                     )
                     .WithName("AddMusicas")
