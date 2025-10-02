@@ -10,6 +10,28 @@ public record UpdateArtistaRequest(int Id, string Name, string Bio, string FotoP
 
 public static class ArtistaRequestExtations
 {
+    public static bool TryUpdateObject(this UpdateArtistaRequest request, IDal db)
+    {
+        int id = request.Id;
+        var artistToUpdate = db.Artistas.GetById(id);
+        if (artistToUpdate is null)
+            return false;
+
+        List<Musica> musicas = [];
+        if (request.Musics.Count > 0)
+        {
+            musicas = [.. request.Musics.Select(m => m.ConvertToObject(db))];
+        }
+
+        artistToUpdate.Musicas = musicas;
+        artistToUpdate.Nome = request.Name;
+        artistToUpdate.FotoPerfil = request.FotoPerfil;
+        artistToUpdate.Bio = request.Bio;
+
+        db.Artistas.Update(artistToUpdate);
+        return true;
+    }
+
     public static Artista? TryGetObject(this ArtistaRequest artista, IDal db)
     {
         return db.Artistas.GetSingle(a => a.Nome == artista.Name);
