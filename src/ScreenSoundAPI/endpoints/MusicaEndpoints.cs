@@ -70,22 +70,12 @@ internal static class MusicasEndpoints
 
         app.MapPut(
                 "/Musicas",
-                ([FromServices] IDal db, [FromBody] Musica musica) =>
+                ([FromServices] IDal db, [FromBody] UpdateMusicaRequest musica) =>
                 {
-                    int id = musica.Id;
-                    var musicToUpdate = db.Musicas.GetById(id);
-                    if (musicToUpdate is null)
-                    {
-                        return Results.NotFound();
-                    }
-                    else
-                    {
-                        musicToUpdate.Artista = musica.Artista;
-                        musicToUpdate.DataLancamento = musica.DataLancamento;
-
-                        db.Musicas.Update(musicToUpdate);
+                    bool result = musica.TryUpdateObject(db);
+                    if (result == true)
                         return Results.Ok();
-                    }
+                    return Results.NotFound();
                 }
             )
             .WithName("UpdateMusica")
