@@ -42,16 +42,12 @@ internal static class MusicasEndpoints
                         "/Musicas",
                         ([FromServices] IDal db, [FromBody] MusicaRequest musica) =>
                         {
-                            var musicToAdd = new Musica(musica.Name)
-                            {
-                                Generos = [.. musica.Generos.Select(g =>
-                            new Genero()
-                            {
-                                Nome = g.Name,
-                                Descricao = g.Description,
-                            })],
-                            };
-                            db.Musicas.Add(musicToAdd);
+                            var musicaAdded = musica.TryGetObject(db);
+                            if (musicaAdded is not null)
+                                return Results.Conflict();
+
+                            musica.ConvertToObject(db);
+                            return Results.Created();
                         }
                     )
                     .WithName("AddMusicas")
