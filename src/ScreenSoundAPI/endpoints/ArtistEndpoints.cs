@@ -73,20 +73,12 @@ internal static class ArtistEndpoints
 
         app.MapPut(
                 "/Artistas",
-                ([FromServices] IDal db, [FromBody] Artista artista) =>
+                ([FromServices] IDal db, [FromBody] UpdateArtistaRequest artista) =>
                 {
-                    int id = artista.Id;
-                    var artistToUpdate = db.Artistas.GetById(id);
-                    if (artistToUpdate is null)
-                        return Results.NotFound();
-
-                    artistToUpdate.Musicas = artista.Musicas;
-                    artistToUpdate.Nome = artista.Nome;
-                    artistToUpdate.FotoPerfil = artista.FotoPerfil;
-                    artistToUpdate.Bio = artista.Bio;
-
-                    db.Artistas.Update(artistToUpdate);
-                    return Results.Ok();
+                    bool result = artista.TryUpdateObject(db);
+                    if (result == true)
+                        return Results.Ok();
+                    return Results.NotFound();
                 }
             )
             .WithName("UpdateArtista")
