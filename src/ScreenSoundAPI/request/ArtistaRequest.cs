@@ -23,10 +23,10 @@ public static class ArtistaRequestExtations
             musicas = [.. request.Musics.Select(m => m.ConvertToObject(db))];
         }
 
-        artistToUpdate.Musicas = musicas;
-        artistToUpdate.Nome = request.Name;
-        artistToUpdate.FotoPerfil = request.FotoPerfil;
-        artistToUpdate.Bio = request.Bio;
+        artistToUpdate.Musicas = musicas.Count > 0 ? musicas : artistToUpdate.Musicas;
+        artistToUpdate.Nome = request.Name is not null ? request.Name : artistToUpdate.Nome;
+        artistToUpdate.FotoPerfil = request.FotoPerfil is not null ? request.FotoPerfil : artistToUpdate.FotoPerfil;
+        artistToUpdate.Bio = request.Bio is not null ? request.Bio : artistToUpdate.Bio;
 
         db.Artistas.Update(artistToUpdate);
         return true;
