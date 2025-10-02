@@ -44,9 +44,7 @@ internal static class ArtistEndpoints
                 {
                     var artistaAdded = artista.TryGetObject(db);
                     if (artistaAdded is not null)
-                    {
                         return Results.Conflict();
-                    }
 
                     artista.ConvertToObject(db);
                     return Results.Created();
