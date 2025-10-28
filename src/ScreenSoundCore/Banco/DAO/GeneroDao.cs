@@ -9,18 +9,18 @@ internal class GeneroDao(EntityContext context) : IDao<Genre>
 
     public void Add(Genre genero)
     {
-        _context.Generos.Add(genero);
+        _context.Genres.Add(genero);
         _context.SaveChanges();
     }
 
     public IEnumerable<Genre> GetAll()
     {
-        return _context.Generos;
+        return _context.Genres;
     }
 
     public Genre? GetSingle(Func<Genre, bool> condition)
     {
-        return _context.Generos.SingleOrDefault(condition);
+        return _context.Genres.SingleOrDefault(condition);
     }
 
     public Genre? GetById(int id)
@@ -30,18 +30,18 @@ internal class GeneroDao(EntityContext context) : IDao<Genre>
 
     public void Remove(Genre genero)
     {
-        _context.Generos.Remove(genero);
+        _context.Genres.Remove(genero);
         _context.SaveChanges();
     }
 
     public void Update(Genre genero)
     {
-        _context.Generos.Update(genero);
+        _context.Genres.Update(genero);
         _context.SaveChanges();
     }
 
     public IEnumerable<Genre> GetAllWith(Func<Genre, bool> condition)
     {
-        return _context.Generos.Where(condition);
+        return _context.Genres.Where(condition);
     }
 }

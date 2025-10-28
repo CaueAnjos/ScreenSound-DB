@@ -9,18 +9,18 @@ internal class ArtistaDao(EntityContext context) : IDao<Artist>
 
     public void Add(Artist artista)
     {
-        _context.Artistas.Add(artista);
+        _context.Artists.Add(artista);
         _context.SaveChanges();
     }
 
     public IEnumerable<Artist> GetAll()
     {
-        return _context.Artistas;
+        return _context.Artists;
     }
 
     public Artist? GetSingle(Func<Artist, bool> condition)
     {
-        return _context.Artistas.SingleOrDefault(condition);
+        return _context.Artists.SingleOrDefault(condition);
     }
 
     public Artist? GetById(int id)
@@ -33,21 +33,21 @@ internal class ArtistaDao(EntityContext context) : IDao<Artist>
         foreach (var musica in artista.Musics)
         {
             musica.Artist = null;
-            _context.Musicas.Update(musica);
+            _context.Musics.Update(musica);
         }
 
-        _context.Artistas.Remove(artista);
+        _context.Artists.Remove(artista);
         _context.SaveChanges();
     }
 
     public void Update(Artist artista)
     {
-        _context.Artistas.Update(artista);
+        _context.Artists.Update(artista);
         _context.SaveChanges();
     }
 
     public IEnumerable<Artist> GetAllWith(Func<Artist, bool> condition)
     {
-        return _context.Artistas.Where(condition);
+        return _context.Artists.Where(condition);
     }
 }

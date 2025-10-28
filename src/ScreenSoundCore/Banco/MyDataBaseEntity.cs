@@ -7,9 +7,9 @@ namespace ScreenSoundCore.Banco;
 public class EntityContext : DbContext
 {
 #nullable disable
-    public DbSet<Artist> Artistas { get; set; }
-    public DbSet<Music> Musicas { get; set; }
-    public DbSet<Genre> Generos { get; set; }
+    public DbSet<Artist> Artists { get; set; }
+    public DbSet<Music> Musics { get; set; }
+    public DbSet<Genre> Genres { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
