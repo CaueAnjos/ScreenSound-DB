@@ -2,8 +2,6 @@ namespace ScreenSoundCore.Modelos;
 
 public class Artist
 {
-    public virtual ICollection<Music> Musics { get; set; } = [];
-
     [Obsolete("Moving code away from models!")]
     public Artist(string name, string bio)
     {
@@ -16,10 +14,11 @@ public class Artist
     {
     }
 
+    public int Id { get; set; }
     public required string Name { get; set; }
     public required string Bio { get; set; }
     public string? PerfilPhoto { get; set; }
-    public int Id { get; set; }
+    public virtual ICollection<Music>? Musics { get; set; }
 
     [Obsolete("Moving code away from models!")]
     public void AdicionarMusica(Music musica)
