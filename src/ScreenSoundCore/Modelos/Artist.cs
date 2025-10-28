@@ -18,7 +18,7 @@ public class Artist
 
     public required string Name { get; set; }
     public required string Bio { get; set; }
-    public string PerfilPhoto { get; set; }
+    public string? PerfilPhoto { get; set; }
     public int Id { get; set; }
 
     [Obsolete("Moving code away from models!")]
