@@ -3,6 +3,7 @@ using ScreenSoundCore.Modelos;
 
 namespace ScreenSoundCore.Banco;
 
+[Obsolete("We are trying to use DbContext(EntityContext) instead")]
 public interface IDal
 {
     public IDao<Artista> Artistas { get; }

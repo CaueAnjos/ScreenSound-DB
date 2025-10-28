@@ -1,5 +1,6 @@
 namespace ScreenSoundCore.Banco.Dao;
 
+[Obsolete("We are trying to use DbContext(EntityContext) instead")]
 public interface IDao<T>
 {
     IEnumerable<T> GetAll();
