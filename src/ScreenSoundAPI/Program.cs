@@ -12,7 +12,7 @@ builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =
     options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles
 );
 
-builder.Services.AddDbContext<EntityContext>();
+builder.Services.AddDbContext<MusicsContext>();
 builder.Services.AddTransient<IDal, MyDataBaseEntity>();
 
 var app = builder.Build();

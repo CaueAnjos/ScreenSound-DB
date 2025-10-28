@@ -4,7 +4,7 @@ using ScreenSoundCore.Modelos;
 
 namespace ScreenSoundCore.Banco;
 
-public class EntityContext : DbContext
+public class MusicsContext : DbContext
 {
 #nullable disable
     public DbSet<Artist> Artists { get; set; }
@@ -29,7 +29,7 @@ public class EntityContext : DbContext
 [Obsolete("We are trying to use DbContext(EntityContext) instead")]
 public class MyDataBaseEntity : IDal
 {
-    public MyDataBaseEntity(EntityContext context)
+    public MyDataBaseEntity(MusicsContext context)
     {
         Context = context;
         Artistas = new ArtistaDao(context);
@@ -37,7 +37,7 @@ public class MyDataBaseEntity : IDal
         Generos = new GeneroDao(context);
     }
 
-    public EntityContext Context { get; set; }
+    public MusicsContext Context { get; set; }
 
     public IDao<Artist> Artistas { get; init; }
     public IDao<Music> Musicas { get; init; }

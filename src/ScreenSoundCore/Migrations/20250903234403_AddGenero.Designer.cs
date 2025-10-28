@@ -11,7 +11,7 @@ using ScreenSoundCore.Banco;
 
 namespace ScreenSoundCore.Migrations
 {
-    [DbContext(typeof(EntityContext))]
+    [DbContext(typeof(MusicsContext))]
     [Migration("20250903234403_AddGenero")]
     partial class AddGenero
     {
