@@ -6,7 +6,7 @@ public class Music
     public Music(string nome)
     {
         Name = nome;
-        Genres = new List<Genero>();
+        Genres = new List<Genre>();
     }
 
     public Music()
@@ -17,7 +17,7 @@ public class Music
     public required string Name { get; set; }
     public DateTime? ReleaseDate { get; set; }
     public virtual Artist? Artist { get; set; }
-    public virtual ICollection<Genero>? Genres { get; set; }
+    public virtual ICollection<Genre>? Genres { get; set; }
 
     public override string ToString()
     {

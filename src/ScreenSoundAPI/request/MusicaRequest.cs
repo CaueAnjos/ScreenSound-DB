@@ -52,7 +52,7 @@ public static class MusicaRequestExtations
             Name = musica.Name,
         };
 
-        ICollection<Genero> generos = [];
+        ICollection<Genre> generos = [];
         if (musica.Generos.Count > 0)
         {
             generos = [.. musica.Generos.Select(g => g.ConvertToObject(db))];

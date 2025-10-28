@@ -6,8 +6,8 @@ public record GeneroResponse(string Name, string Description);
 
 public static class GeneroResponseExtations
 {
-    public static GeneroResponse GetResponse(this Genero genero)
+    public static GeneroResponse GetResponse(this Genre genero)
     {
-        return new GeneroResponse(genero.Nome, genero.Descricao);
+        return new GeneroResponse(genero.Name, genero.Descricao);
     }
 }

@@ -9,7 +9,7 @@ public class EntityContext : DbContext
 #nullable disable
     public DbSet<Artist> Artistas { get; set; }
     public DbSet<Music> Musicas { get; set; }
-    public DbSet<Genero> Generos { get; set; }
+    public DbSet<Genre> Generos { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -22,7 +22,7 @@ public class EntityContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Music>().HasMany(c => c.Genres).WithMany(c => c.Musicas);
+        modelBuilder.Entity<Music>().HasMany(c => c.Genres).WithMany(c => c.Musics);
     }
 }
 
@@ -41,5 +41,5 @@ public class MyDataBaseEntity : IDal
 
     public IDao<Artist> Artistas { get; init; }
     public IDao<Music> Musicas { get; init; }
-    public IDao<Genero> Generos { get; init; }
+    public IDao<Genre> Generos { get; init; }
 }

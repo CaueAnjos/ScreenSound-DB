@@ -32,7 +32,7 @@ internal class MusicaDao(EntityContext context) : IDao<Music>
     {
         foreach (var genero in musica.Genres)
         {
-            genero.Musicas.Remove(musica);
+            genero.Musics.Remove(musica);
             _context.Generos.Update(genero);
         }
 
