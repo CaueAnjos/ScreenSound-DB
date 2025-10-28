@@ -16,7 +16,7 @@ internal class MenuRegistrarMusica : Menu
         Console.Write("Agora digite o nome do autor desta música: ");
         string artistaNome = Console.ReadLine()!;
 
-        Musica musica = new Musica(tituloDaMusica);
+        Music musica = new Music(tituloDaMusica);
         dal.Musicas.Add(musica);
 
         Artist artista = dal.Artistas.GetSingle(a => a.Name == artistaNome);

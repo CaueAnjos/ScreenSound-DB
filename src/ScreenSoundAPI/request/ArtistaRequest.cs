@@ -17,7 +17,7 @@ public static class ArtistaRequestExtations
         if (artistToUpdate is null)
             return false;
 
-        List<Musica> musicas = [];
+        List<Music> musicas = [];
         if (request.Musics.Count > 0)
         {
             musicas = [.. request.Musics.Select(m => m.ConvertToObject(db))];
@@ -49,7 +49,7 @@ public static class ArtistaRequestExtations
             Bio = artista.Bio,
         };
 
-        List<Musica> musicas = [];
+        List<Music> musicas = [];
         if (artista.Musics.Count > 0)
         {
             musicas = [.. artista.Musics.Select(m => m.ConvertToObject(db))];

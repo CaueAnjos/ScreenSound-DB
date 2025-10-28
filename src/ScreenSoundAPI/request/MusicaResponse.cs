@@ -6,7 +6,7 @@ public record MusicaResponse(int Id, string Name, DateTime DataLancamento, int? 
 
 public static class MusicaResponseExtations
 {
-    public static MusicaResponse GetResponse(this Musica musica)
+    public static MusicaResponse GetResponse(this Music musica)
     {
         int? artistaId = musica.Artista?.Id ?? null;
         var generos = musica.Generos.Select(g => g.GetResponse()).ToList();

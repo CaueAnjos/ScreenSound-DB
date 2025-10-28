@@ -3,32 +3,32 @@ using ScreenSoundCore.Modelos;
 namespace ScreenSoundCore.Banco.Dao;
 
 [Obsolete("We are trying to use DbContext(EntityContext) instead")]
-internal class MusicaDao(EntityContext context) : IDao<Musica>
+internal class MusicaDao(EntityContext context) : IDao<Music>
 {
     private EntityContext _context = context;
 
-    public void Add(Musica musica)
+    public void Add(Music musica)
     {
         _context.Musicas.Add(musica);
         _context.SaveChanges();
     }
 
-    public IEnumerable<Musica> GetAll()
+    public IEnumerable<Music> GetAll()
     {
         return _context.Musicas;
     }
 
-    public Musica? GetSingle(Func<Musica, bool> condition)
+    public Music? GetSingle(Func<Music, bool> condition)
     {
         return _context.Musicas.SingleOrDefault(condition);
     }
 
-    public Musica? GetById(int id)
+    public Music? GetById(int id)
     {
         return GetSingle(a => a.Id == id);
     }
 
-    public void Remove(Musica musica)
+    public void Remove(Music musica)
     {
         foreach (var genero in musica.Generos)
         {
@@ -46,13 +46,13 @@ internal class MusicaDao(EntityContext context) : IDao<Musica>
         _context.SaveChanges();
     }
 
-    public void Update(Musica musica)
+    public void Update(Music musica)
     {
         _context.Musicas.Update(musica);
         _context.SaveChanges();
     }
 
-    public IEnumerable<Musica> GetAllWith(Func<Musica, bool> condition)
+    public IEnumerable<Music> GetAllWith(Func<Music, bool> condition)
     {
         return _context.Musicas.Where(condition);
     }

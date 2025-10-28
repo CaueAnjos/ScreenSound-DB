@@ -1,14 +1,14 @@
 namespace ScreenSoundCore.Modelos;
 
-public class Musica
+public class Music
 {
-    public Musica(string nome)
+    public Music(string nome)
     {
         Nome = nome;
         Generos = new List<Genero>();
     }
 
-    public Musica()
+    public Music()
     {
         Nome = string.Empty;
         this.Artista = null;

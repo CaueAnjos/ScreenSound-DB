@@ -6,11 +6,11 @@ public class Genero
     {
         Nome = string.Empty;
         Descricao = string.Empty;
-        Musicas = new List<Musica>();
+        Musicas = new List<Music>();
     }
 
     public string Nome { get; set; }
     public string Descricao { get; set; }
     public int Id { get; set; }
-    public virtual ICollection<Musica> Musicas { get; set; }
+    public virtual ICollection<Music> Musicas { get; set; }
 }
