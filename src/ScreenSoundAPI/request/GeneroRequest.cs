@@ -7,20 +7,20 @@ public record GeneroRequest(string Name, string Description);
 
 public static class GeneroRequestExtations
 {
-    public static Genero? TryGetObject(this GeneroRequest genero, IDal db)
+    public static Genre? TryGetObject(this GeneroRequest genero, IDal db)
     {
-        return db.Generos.GetSingle(g => g.Nome == genero.Name);
+        return db.Generos.GetSingle(g => g.Name == genero.Name);
     }
 
-    public static Genero ConvertToObject(this GeneroRequest genero, IDal db)
+    public static Genre ConvertToObject(this GeneroRequest genero, IDal db)
     {
         var obj = genero.TryGetObject(db);
         if (obj is not null)
             return obj;
 
-        obj = new Genero()
+        obj = new Genre()
         {
-            Nome = genero.Name,
+            Name = genero.Name,
             Descricao = genero.Description
         };
 

@@ -3,44 +3,44 @@ using ScreenSoundCore.Modelos;
 namespace ScreenSoundCore.Banco.Dao;
 
 [Obsolete("We are trying to use DbContext(EntityContext) instead")]
-internal class GeneroDao(EntityContext context) : IDao<Genero>
+internal class GeneroDao(EntityContext context) : IDao<Genre>
 {
     private EntityContext _context = context;
 
-    public void Add(Genero genero)
+    public void Add(Genre genero)
     {
         _context.Generos.Add(genero);
         _context.SaveChanges();
     }
 
-    public IEnumerable<Genero> GetAll()
+    public IEnumerable<Genre> GetAll()
     {
         return _context.Generos;
     }
 
-    public Genero? GetSingle(Func<Genero, bool> condition)
+    public Genre? GetSingle(Func<Genre, bool> condition)
     {
         return _context.Generos.SingleOrDefault(condition);
     }
 
-    public Genero? GetById(int id)
+    public Genre? GetById(int id)
     {
         return GetSingle(a => a.Id == id);
     }
 
-    public void Remove(Genero genero)
+    public void Remove(Genre genero)
     {
         _context.Generos.Remove(genero);
         _context.SaveChanges();
     }
 
-    public void Update(Genero genero)
+    public void Update(Genre genero)
     {
         _context.Generos.Update(genero);
         _context.SaveChanges();
     }
 
-    public IEnumerable<Genero> GetAllWith(Func<Genero, bool> condition)
+    public IEnumerable<Genre> GetAllWith(Func<Genre, bool> condition)
     {
         return _context.Generos.Where(condition);
     }

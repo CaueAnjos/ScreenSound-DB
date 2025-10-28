@@ -1,16 +1,9 @@
 namespace ScreenSoundCore.Modelos;
 
-public class Genero
+public class Genre
 {
-    public Genero()
-    {
-        Nome = string.Empty;
-        Descricao = string.Empty;
-        Musicas = new List<Music>();
-    }
-
-    public string Nome { get; set; }
-    public string Descricao { get; set; }
     public int Id { get; set; }
-    public virtual ICollection<Music> Musicas { get; set; }
+    public required string Name { get; set; }
+    public required string Descricao { get; set; }
+    public virtual ICollection<Music>? Musics { get; set; }
 }
