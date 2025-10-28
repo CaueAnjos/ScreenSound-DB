@@ -4,6 +4,7 @@ public class Artist
 {
     public virtual ICollection<Musica> Musics { get; set; } = [];
 
+    [Obsolete("Moving code away from models!")]
     public Artist(string name, string bio)
     {
         Name = name;
@@ -13,15 +14,11 @@ public class Artist
 
     public Artist()
     {
-        Name = string.Empty;
-        Bio = string.Empty;
-        PerfilPhoto = "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png";
-        Id = 0;
     }
 
-    public string Name { get; set; }
+    public required string Name { get; set; }
+    public required string Bio { get; set; }
     public string PerfilPhoto { get; set; }
-    public string Bio { get; set; }
     public int Id { get; set; }
 
     [Obsolete("Moving code away from models!")]
