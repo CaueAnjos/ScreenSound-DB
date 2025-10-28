@@ -30,16 +30,16 @@ internal class MusicaDao(EntityContext context) : IDao<Music>
 
     public void Remove(Music musica)
     {
-        foreach (var genero in musica.Generos)
+        foreach (var genero in musica.Genres)
         {
             genero.Musicas.Remove(musica);
             _context.Generos.Update(genero);
         }
 
-        if (musica.Artista is not null)
+        if (musica.Artist is not null)
         {
-            musica.Artista.Musics.Remove(musica);
-            _context.Artistas.Update(musica.Artista);
+            musica.Artist.Musics.Remove(musica);
+            _context.Artistas.Update(musica.Artist);
         }
 
         _context.Musicas.Remove(musica);

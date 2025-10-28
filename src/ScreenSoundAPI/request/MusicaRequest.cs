@@ -20,17 +20,17 @@ public static class MusicaRequestExtations
         var artista = db.Artistas.GetById(request.ArtistaId);
         if (artista is not null)
         {
-            musicToUpdate.Artista = artista;
+            musicToUpdate.Artist = artista;
             artista.AdicionarMusica(musicToUpdate);
         }
         else
         {
-            musicToUpdate.Artista = musicToUpdate.Artista;
+            musicToUpdate.Artist = musicToUpdate.Artist;
         }
 
-        musicToUpdate.DataLancamento = request.Date != DateTime.MinValue ? request.Date : musicToUpdate.DataLancamento;
-        musicToUpdate.Nome = request.Name is not null ? request.Name : musicToUpdate.Nome;
-        musicToUpdate.Generos = [.. request.Generos.Select(g => g.ConvertToObject(db))];
+        musicToUpdate.ReleaseDate = request.Date != DateTime.MinValue ? request.Date : musicToUpdate.ReleaseDate;
+        musicToUpdate.Name = request.Name is not null ? request.Name : musicToUpdate.Name;
+        musicToUpdate.Genres = [.. request.Generos.Select(g => g.ConvertToObject(db))];
 
         db.Musicas.Update(musicToUpdate);
         return true;
@@ -38,7 +38,7 @@ public static class MusicaRequestExtations
 
     public static Music? TryGetObject(this MusicaRequest musica, IDal db)
     {
-        return db.Musicas.GetSingle(a => a.Nome == musica.Name);
+        return db.Musicas.GetSingle(a => a.Name == musica.Name);
     }
 
     public static Music ConvertToObject(this MusicaRequest musica, IDal db)
@@ -49,7 +49,7 @@ public static class MusicaRequestExtations
 
         obj = new Music()
         {
-            Nome = musica.Name,
+            Name = musica.Name,
         };
 
         ICollection<Genero> generos = [];
@@ -58,7 +58,7 @@ public static class MusicaRequestExtations
             generos = [.. musica.Generos.Select(g => g.ConvertToObject(db))];
         }
 
-        obj.Generos = generos;
+        obj.Genres = generos;
 
         db.Musicas.Add(obj);
         return obj;

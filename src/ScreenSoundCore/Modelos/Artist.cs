@@ -24,7 +24,7 @@ public class Artist
     public void AdicionarMusica(Music musica)
     {
         Musics.Add(musica);
-        musica.Artista = this;
+        musica.Artist = this;
     }
 
     [Obsolete("Moving code away from models!")]
@@ -33,7 +33,7 @@ public class Artist
         Console.WriteLine($"Discografia do artista {Name}");
         foreach (var musica in Musics)
         {
-            Console.WriteLine($"Música: {musica.Nome}");
+            Console.WriteLine($"Música: {musica.Name}");
         }
     }
 
