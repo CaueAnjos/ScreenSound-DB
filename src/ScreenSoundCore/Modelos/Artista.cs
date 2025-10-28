@@ -1,5 +1,6 @@
 namespace ScreenSoundCore.Modelos;
 
+[Obsolete]
 public class Artista
 {
     public virtual List<Musica> Musicas { get; set; } = [];
@@ -24,12 +25,14 @@ public class Artista
     public string Bio { get; set; }
     public int Id { get; set; }
 
+    [Obsolete("Moving code away from models!")]
     public void AdicionarMusica(Musica musica)
     {
         Musicas.Add(musica);
         musica.Artista = this;
     }
 
+    [Obsolete("Moving code away from models!")]
     public void ExibirDiscografia()
     {
         Console.WriteLine($"Discografia do artista {Nome}");

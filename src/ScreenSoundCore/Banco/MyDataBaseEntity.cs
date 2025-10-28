@@ -26,6 +26,7 @@ public class EntityContext : DbContext
     }
 }
 
+[Obsolete("We are trying to use DbContext(EntityContext) instead")]
 public class MyDataBaseEntity : IDal
 {
     public MyDataBaseEntity(EntityContext context)
