@@ -22,7 +22,7 @@ public class EntityContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Music>().HasMany(c => c.Generos).WithMany(c => c.Musicas);
+        modelBuilder.Entity<Music>().HasMany(c => c.Genres).WithMany(c => c.Musicas);
     }
 }
 

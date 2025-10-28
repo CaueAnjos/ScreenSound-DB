@@ -2,36 +2,28 @@ namespace ScreenSoundCore.Modelos;
 
 public class Music
 {
+    [Obsolete("Moving code away from models!")]
     public Music(string nome)
     {
-        Nome = nome;
-        Generos = new List<Genero>();
+        Name = nome;
+        Genres = new List<Genero>();
     }
 
     public Music()
     {
-        Nome = string.Empty;
-        this.Artista = null;
-        Id = 0;
-        Generos = new List<Genero>();
     }
 
-    public string Nome { get; set; }
     public int Id { get; set; }
-    public virtual Artist? Artista { get; set; }
-    public DateTime DataLancamento { get; set; } = DateTime.Today;
-    public virtual ICollection<Genero> Generos { get; set; }
-
-    public void ExibirFichaTecnica()
-    {
-        Console.WriteLine($"Nome: {Nome}");
-    }
+    public required string Name { get; set; }
+    public DateTime? ReleaseDate { get; set; }
+    public virtual Artist? Artist { get; set; }
+    public virtual ICollection<Genero>? Genres { get; set; }
 
     public override string ToString()
     {
         return @$"Id: {Id}
-        Nome: {Nome}
-        Artista: {Artista?.Name}
-        Data de lançamento: {DataLancamento}";
+        Nome: {Name}
+        Artista: {Artist?.Name}
+        Data de lançamento: {ReleaseDate}";
     }
 }

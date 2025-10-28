@@ -16,7 +16,7 @@ internal class MenuMostrarMusicasPorData : Menu
         if (DateTime.TryParse(response, out DateTime dataLancamento))
         {
             IEnumerable<Music> musicas = db.Musicas.GetAllWith(musica =>
-                musica.DataLancamento == dataLancamento
+                musica.ReleaseDate == dataLancamento
             );
 
             foreach (Music musica in musicas)

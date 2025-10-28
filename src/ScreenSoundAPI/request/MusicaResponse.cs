@@ -8,8 +8,8 @@ public static class MusicaResponseExtations
 {
     public static MusicaResponse GetResponse(this Music musica)
     {
-        int? artistaId = musica.Artista?.Id ?? null;
-        var generos = musica.Generos.Select(g => g.GetResponse()).ToList();
-        return new MusicaResponse(musica.Id, musica.Nome, musica.DataLancamento, artistaId, generos);
+        int? artistaId = musica.Artist?.Id ?? null;
+        var generos = musica.Genres.Select(g => g.GetResponse()).ToList();
+        return new MusicaResponse(musica.Id, musica.Name, musica.ReleaseDate, artistaId, generos);
     }
 }
