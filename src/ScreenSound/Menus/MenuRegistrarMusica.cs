@@ -19,7 +19,7 @@ internal class MenuRegistrarMusica : Menu
         Musica musica = new Musica(tituloDaMusica);
         dal.Musicas.Add(musica);
 
-        Artista artista = dal.Artistas.GetSingle(a => a.Nome == artistaNome);
+        Artist artista = dal.Artistas.GetSingle(a => a.Name == artistaNome);
         artista.AdicionarMusica(musica);
         dal.Artistas.Update(artista);
 

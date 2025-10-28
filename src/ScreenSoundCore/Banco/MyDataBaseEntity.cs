@@ -7,7 +7,7 @@ namespace ScreenSoundCore.Banco;
 public class EntityContext : DbContext
 {
 #nullable disable
-    public DbSet<Artista> Artistas { get; set; }
+    public DbSet<Artist> Artistas { get; set; }
     public DbSet<Musica> Musicas { get; set; }
     public DbSet<Genero> Generos { get; set; }
 
@@ -39,7 +39,7 @@ public class MyDataBaseEntity : IDal
 
     public EntityContext Context { get; set; }
 
-    public IDao<Artista> Artistas { get; init; }
+    public IDao<Artist> Artistas { get; init; }
     public IDao<Musica> Musicas { get; init; }
     public IDao<Genero> Generos { get; init; }
 }

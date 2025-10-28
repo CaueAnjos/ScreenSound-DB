@@ -38,7 +38,7 @@ internal class MusicaDao(EntityContext context) : IDao<Musica>
 
         if (musica.Artista is not null)
         {
-            musica.Artista.Musicas.Remove(musica);
+            musica.Artista.Musics.Remove(musica);
             _context.Artistas.Update(musica.Artista);
         }
 
