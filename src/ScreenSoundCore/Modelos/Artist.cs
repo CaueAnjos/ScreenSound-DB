@@ -2,7 +2,7 @@ namespace ScreenSoundCore.Modelos;
 
 public class Artist
 {
-    public virtual ICollection<Musica> Musics { get; set; } = [];
+    public virtual ICollection<Music> Musics { get; set; } = [];
 
     [Obsolete("Moving code away from models!")]
     public Artist(string name, string bio)
@@ -22,7 +22,7 @@ public class Artist
     public int Id { get; set; }
 
     [Obsolete("Moving code away from models!")]
-    public void AdicionarMusica(Musica musica)
+    public void AdicionarMusica(Music musica)
     {
         Musics.Add(musica);
         musica.Artista = this;

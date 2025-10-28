@@ -36,18 +36,18 @@ public static class MusicaRequestExtations
         return true;
     }
 
-    public static Musica? TryGetObject(this MusicaRequest musica, IDal db)
+    public static Music? TryGetObject(this MusicaRequest musica, IDal db)
     {
         return db.Musicas.GetSingle(a => a.Nome == musica.Name);
     }
 
-    public static Musica ConvertToObject(this MusicaRequest musica, IDal db)
+    public static Music ConvertToObject(this MusicaRequest musica, IDal db)
     {
         var obj = musica.TryGetObject(db);
         if (obj is not null)
             return obj;
 
-        obj = new Musica()
+        obj = new Music()
         {
             Nome = musica.Name,
         };

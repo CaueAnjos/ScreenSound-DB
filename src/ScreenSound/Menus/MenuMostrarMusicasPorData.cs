@@ -15,11 +15,11 @@ internal class MenuMostrarMusicasPorData : Menu
 
         if (DateTime.TryParse(response, out DateTime dataLancamento))
         {
-            IEnumerable<Musica> musicas = db.Musicas.GetAllWith(musica =>
+            IEnumerable<Music> musicas = db.Musicas.GetAllWith(musica =>
                 musica.DataLancamento == dataLancamento
             );
 
-            foreach (Musica musica in musicas)
+            foreach (Music musica in musicas)
             {
                 Console.WriteLine(musica);
             }

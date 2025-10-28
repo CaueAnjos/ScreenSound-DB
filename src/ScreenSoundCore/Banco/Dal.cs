@@ -7,6 +7,6 @@ namespace ScreenSoundCore.Banco;
 public interface IDal
 {
     public IDao<Artist> Artistas { get; }
-    public IDao<Musica> Musicas { get; }
+    public IDao<Music> Musicas { get; }
     public IDao<Genero> Generos { get; }
 }
