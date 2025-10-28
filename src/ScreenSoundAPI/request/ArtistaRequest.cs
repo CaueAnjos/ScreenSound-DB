@@ -23,29 +23,29 @@ public static class ArtistaRequestExtations
             musicas = [.. request.Musics.Select(m => m.ConvertToObject(db))];
         }
 
-        artistToUpdate.Musicas = musicas.Count > 0 ? musicas : artistToUpdate.Musicas;
-        artistToUpdate.Nome = request.Name is not null ? request.Name : artistToUpdate.Nome;
-        artistToUpdate.FotoPerfil = request.FotoPerfil is not null ? request.FotoPerfil : artistToUpdate.FotoPerfil;
+        artistToUpdate.Musics = musicas.Count > 0 ? musicas : artistToUpdate.Musics;
+        artistToUpdate.Name = request.Name is not null ? request.Name : artistToUpdate.Name;
+        artistToUpdate.PerfilPhoto = request.FotoPerfil is not null ? request.FotoPerfil : artistToUpdate.PerfilPhoto;
         artistToUpdate.Bio = request.Bio is not null ? request.Bio : artistToUpdate.Bio;
 
         db.Artistas.Update(artistToUpdate);
         return true;
     }
 
-    public static Artista? TryGetObject(this ArtistaRequest artista, IDal db)
+    public static Artist? TryGetObject(this ArtistaRequest artista, IDal db)
     {
-        return db.Artistas.GetSingle(a => a.Nome == artista.Name);
+        return db.Artistas.GetSingle(a => a.Name == artista.Name);
     }
 
-    public static Artista ConvertToObject(this ArtistaRequest artista, IDal db)
+    public static Artist ConvertToObject(this ArtistaRequest artista, IDal db)
     {
         var obj = artista.TryGetObject(db);
         if (obj is not null)
             return obj;
 
-        obj = new Artista()
+        obj = new Artist()
         {
-            Nome = artista.Name,
+            Name = artista.Name,
             Bio = artista.Bio,
         };
 
@@ -55,7 +55,7 @@ public static class ArtistaRequestExtations
             musicas = [.. artista.Musics.Select(m => m.ConvertToObject(db))];
         }
 
-        obj.Musicas = musicas;
+        obj.Musics = musicas;
 
         db.Artistas.Add(obj);
         return obj;

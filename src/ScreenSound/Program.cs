@@ -2,8 +2,8 @@ using ScreenSound.Menus;
 using ScreenSoundCore.Banco;
 using ScreenSoundCore.Modelos;
 
-Artista ira = new Artista("Ira!", "Banda Ira!");
-Artista beatles = new("The Beatles", "Banda The Beatles");
+Artist ira = new Artist("Ira!", "Banda Ira!");
+Artist beatles = new("The Beatles", "Banda The Beatles");
 
 using EntityContext context = new();
 IDal artistasRegistrados = new MyDataBaseEntity(context);

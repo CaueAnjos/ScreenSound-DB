@@ -18,7 +18,7 @@ public class Musica
 
     public string Nome { get; set; }
     public int Id { get; set; }
-    public virtual Artista? Artista { get; set; }
+    public virtual Artist? Artista { get; set; }
     public DateTime DataLancamento { get; set; } = DateTime.Today;
     public virtual ICollection<Genero> Generos { get; set; }
 
@@ -31,7 +31,7 @@ public class Musica
     {
         return @$"Id: {Id}
         Nome: {Nome}
-        Artista: {Artista?.Nome}
+        Artista: {Artista?.Name}
         Data de lançamento: {DataLancamento}";
     }
 }

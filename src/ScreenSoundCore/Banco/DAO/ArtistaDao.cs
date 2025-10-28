@@ -3,34 +3,34 @@ using ScreenSoundCore.Modelos;
 namespace ScreenSoundCore.Banco.Dao;
 
 [Obsolete("We are trying to use DbContext(EntityContext) instead")]
-internal class ArtistaDao(EntityContext context) : IDao<Artista>
+internal class ArtistaDao(EntityContext context) : IDao<Artist>
 {
     private readonly EntityContext _context = context;
 
-    public void Add(Artista artista)
+    public void Add(Artist artista)
     {
         _context.Artistas.Add(artista);
         _context.SaveChanges();
     }
 
-    public IEnumerable<Artista> GetAll()
+    public IEnumerable<Artist> GetAll()
     {
         return _context.Artistas;
     }
 
-    public Artista? GetSingle(Func<Artista, bool> condition)
+    public Artist? GetSingle(Func<Artist, bool> condition)
     {
         return _context.Artistas.SingleOrDefault(condition);
     }
 
-    public Artista? GetById(int id)
+    public Artist? GetById(int id)
     {
         return GetSingle(a => a.Id == id);
     }
 
-    public void Remove(Artista artista)
+    public void Remove(Artist artista)
     {
-        foreach (var musica in artista.Musicas)
+        foreach (var musica in artista.Musics)
         {
             musica.Artista = null;
             _context.Musicas.Update(musica);
@@ -40,13 +40,13 @@ internal class ArtistaDao(EntityContext context) : IDao<Artista>
         _context.SaveChanges();
     }
 
-    public void Update(Artista artista)
+    public void Update(Artist artista)
     {
         _context.Artistas.Update(artista);
         _context.SaveChanges();
     }
 
-    public IEnumerable<Artista> GetAllWith(Func<Artista, bool> condition)
+    public IEnumerable<Artist> GetAllWith(Func<Artist, bool> condition)
     {
         return _context.Artistas.Where(condition);
     }

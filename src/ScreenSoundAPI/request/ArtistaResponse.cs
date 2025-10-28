@@ -6,9 +6,9 @@ public record ArtistaResponse(int Id, string Name, string Bio, string FotoPerfil
 
 public static class ArtistaResponseExtations
 {
-    public static ArtistaResponse GetResponse(this Artista artista)
+    public static ArtistaResponse GetResponse(this Artist artista)
     {
-        var musics = artista.Musicas.Select(m => m.GetResponse()).ToArray();
-        return new ArtistaResponse(artista.Id, artista.Nome, artista.Bio, artista.FotoPerfil, musics);
+        var musics = artista.Musics.Select(m => m.GetResponse()).ToArray();
+        return new ArtistaResponse(artista.Id, artista.Name, artista.Bio, artista.PerfilPhoto, musics);
     }
 }
