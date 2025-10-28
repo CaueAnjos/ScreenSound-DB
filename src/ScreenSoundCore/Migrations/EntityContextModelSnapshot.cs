@@ -10,7 +10,7 @@ using ScreenSoundCore.Banco;
 
 namespace ScreenSoundCore.Migrations
 {
-    [DbContext(typeof(EntityContext))]
+    [DbContext(typeof(MusicsContext))]
     partial class EntityContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

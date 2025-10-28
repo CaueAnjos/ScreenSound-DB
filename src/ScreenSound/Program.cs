@@ -5,7 +5,7 @@ using ScreenSoundCore.Modelos;
 Artist ira = new Artist("Ira!", "Banda Ira!");
 Artist beatles = new("The Beatles", "Banda The Beatles");
 
-using EntityContext context = new();
+using MusicsContext context = new();
 IDal artistasRegistrados = new MyDataBaseEntity(context);
 
 Dictionary<int, Menu> opcoes = new();

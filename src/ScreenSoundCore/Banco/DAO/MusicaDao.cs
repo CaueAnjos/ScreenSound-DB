@@ -3,9 +3,9 @@ using ScreenSoundCore.Modelos;
 namespace ScreenSoundCore.Banco.Dao;
 
 [Obsolete("We are trying to use DbContext(EntityContext) instead")]
-internal class MusicaDao(EntityContext context) : IDao<Music>
+internal class MusicaDao(MusicsContext context) : IDao<Music>
 {
-    private EntityContext _context = context;
+    private MusicsContext _context = context;
 
     public void Add(Music musica)
     {
