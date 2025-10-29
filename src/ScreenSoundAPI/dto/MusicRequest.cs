@@ -1,13 +1,10 @@
-using ScreenSoundAPI.dto;
 using ScreenSoundCore.Banco;
 using ScreenSoundCore.Modelos;
 
-namespace ScreenSoundAPI.Request;
+namespace ScreenSoundAPI.dto;
 
-public record MusicaRequest(string Name, ICollection<DefaultGenreRequest> Generos);
-
-// NOTE: this is use on UpdateMusica!
-public record UpdateMusicaRequest(int Id, string Name, DateTime Date, ICollection<DefaultGenreRequest> Generos, int ArtistaId = -1);
+public record DefaultMusicRequest(string Name, ICollection<DefaultGenreRequest> Genres);
+public record UpdateMusicaRequest(int Id, string Name, DateTime Date, ICollection<DefaultGenreRequest> Genres, int ArtistId = -1);
 
 public static class MusicaRequestExtations
 {
@@ -18,7 +15,7 @@ public static class MusicaRequestExtations
         if (musicToUpdate is null)
             return false;
 
-        var artista = db.Artistas.GetById(request.ArtistaId);
+        var artista = db.Artistas.GetById(request.ArtistId);
         if (artista is not null)
         {
             musicToUpdate.Artist = artista;
@@ -31,18 +28,18 @@ public static class MusicaRequestExtations
 
         musicToUpdate.ReleaseDate = request.Date != DateTime.MinValue ? request.Date : musicToUpdate.ReleaseDate;
         musicToUpdate.Name = request.Name is not null ? request.Name : musicToUpdate.Name;
-        musicToUpdate.Genres = [.. request.Generos.Select(g => g.ConvertToObject(db))];
+        musicToUpdate.Genres = [.. request.Genres.Select(g => g.ConvertToObject(db))];
 
         db.Musicas.Update(musicToUpdate);
         return true;
     }
 
-    public static Music? TryGetObject(this MusicaRequest musica, IDal db)
+    public static Music? TryGetObject(this DefaultMusicRequest musica, IDal db)
     {
         return db.Musicas.GetSingle(a => a.Name == musica.Name);
     }
 
-    public static Music ConvertToObject(this MusicaRequest musica, IDal db)
+    public static Music ConvertToObject(this DefaultMusicRequest musica, IDal db)
     {
         var obj = musica.TryGetObject(db);
         if (obj is not null)
@@ -54,9 +51,9 @@ public static class MusicaRequestExtations
         };
 
         ICollection<Genre> generos = [];
-        if (musica.Generos.Count > 0)
+        if (musica.Genres.Count > 0)
         {
-            generos = [.. musica.Generos.Select(g => g.ConvertToObject(db))];
+            generos = [.. musica.Genres.Select(g => g.ConvertToObject(db))];
         }
 
         obj.Genres = generos;

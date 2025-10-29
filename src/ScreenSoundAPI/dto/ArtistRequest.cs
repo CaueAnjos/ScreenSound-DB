@@ -1,13 +1,12 @@
 using ScreenSoundCore.Banco;
 using ScreenSoundCore.Modelos;
 
-namespace ScreenSoundAPI.Request;
+namespace ScreenSoundAPI.dto;
 
-public record ArtistaRequest(string Name, string Bio, ICollection<MusicaRequest> Musics);
+public record DefaultArtistRequest(string Name, string Bio, ICollection<DefaultMusicRequest> Musics);
+public record UpdateArtistaRequest(int Id, string Name, string Bio, string PerfilPhoto, ICollection<DefaultMusicRequest> Musics);
 
-// NOTE: this is used for UpdateArtista endpoint 
-public record UpdateArtistaRequest(int Id, string Name, string Bio, string FotoPerfil, ICollection<MusicaRequest> Musics);
-
+[Obsolete("Use only the dto convertion methods")]
 public static class ArtistaRequestExtations
 {
     public static bool TryUpdateObject(this UpdateArtistaRequest request, IDal db)
@@ -25,19 +24,19 @@ public static class ArtistaRequestExtations
 
         artistToUpdate.Musics = musicas.Count > 0 ? musicas : artistToUpdate.Musics;
         artistToUpdate.Name = request.Name is not null ? request.Name : artistToUpdate.Name;
-        artistToUpdate.PerfilPhoto = request.FotoPerfil is not null ? request.FotoPerfil : artistToUpdate.PerfilPhoto;
+        artistToUpdate.PerfilPhoto = request.PerfilPhoto is not null ? request.PerfilPhoto : artistToUpdate.PerfilPhoto;
         artistToUpdate.Bio = request.Bio is not null ? request.Bio : artistToUpdate.Bio;
 
         db.Artistas.Update(artistToUpdate);
         return true;
     }
 
-    public static Artist? TryGetObject(this ArtistaRequest artista, IDal db)
+    public static Artist? TryGetObject(this DefaultArtistRequest artista, IDal db)
     {
         return db.Artistas.GetSingle(a => a.Name == artista.Name);
     }
 
-    public static Artist ConvertToObject(this ArtistaRequest artista, IDal db)
+    public static Artist ConvertToObject(this DefaultArtistRequest artista, IDal db)
     {
         var obj = artista.TryGetObject(db);
         if (obj is not null)
