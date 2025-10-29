@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using ScreenSoundAPI.dto;
 using ScreenSoundAPI.Request;
 using ScreenSoundCore.Banco;
-using ScreenSoundCore.Modelos;
 
 namespace ScreenSoundAPI.endpoints;
 
@@ -40,7 +40,7 @@ internal static class MusicasEndpoints
 
         app.MapPost(
                         "/Musicas",
-                        ([FromServices] IDal db, [FromBody] MusicaRequest musica) =>
+                        ([FromServices] IDal db, [FromBody] DefaultMusicRequest musica) =>
                         {
                             var musicaAdded = musica.TryGetObject(db);
                             if (musicaAdded is not null)

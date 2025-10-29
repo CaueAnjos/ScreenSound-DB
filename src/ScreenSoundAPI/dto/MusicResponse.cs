@@ -1,8 +1,9 @@
+using ScreenSoundAPI.dto;
 using ScreenSoundCore.Modelos;
 
 namespace ScreenSoundAPI.Request;
 
-public record MusicaResponse(int Id, string Name, DateTime? DataLancamento, int? ArtistaId, ICollection<GeneroResponse> Generos);
+public record MusicaResponse(int Id, string Name, DateTime? DataLancamento, int? ArtistaId, ICollection<DefaultGenreResponse> Generos);
 
 public static class MusicaResponseExtations
 {
