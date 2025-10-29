@@ -3,7 +3,18 @@ using ScreenSoundCore.Modelos;
 
 namespace ScreenSoundAPI.dto;
 
-public record DefaultMusicRequest(string Name, ICollection<DefaultGenreRequest> Genres);
+public record DefaultMusicRequest(string Name, ICollection<DefaultGenreRequest> Genres)
+{
+    public static implicit operator Music(DefaultMusicRequest request)
+    {
+        return new Music
+        {
+            Name = request.Name,
+            Genres = [.. request.Genres.Select(r => (Genre)r)],
+        };
+    }
+}
+
 public record UpdateMusicaRequest(int Id, string Name, DateTime Date, ICollection<DefaultGenreRequest> Genres, int ArtistId = -1);
 
 public static class MusicaRequestExtations

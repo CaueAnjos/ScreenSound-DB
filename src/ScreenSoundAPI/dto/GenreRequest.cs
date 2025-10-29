@@ -3,7 +3,17 @@ using ScreenSoundCore.Modelos;
 
 namespace ScreenSoundAPI.dto;
 
-public record DefaultGenreRequest(string Name, string Description);
+public record DefaultGenreRequest(string Name, string Description)
+{
+    public static implicit operator Genre(DefaultGenreRequest request)
+    {
+        return new Genre
+        {
+            Name = request.Name,
+            Description = request.Description,
+        };
+    }
+}
 
 [Obsolete("Use only the dto convertion methods")]
 public static class GeneroRequestExtations
@@ -22,7 +32,7 @@ public static class GeneroRequestExtations
         obj = new Genre()
         {
             Name = genero.Name,
-            Descricao = genero.Description
+            Description = genero.Description
         };
 
         db.Generos.Add(obj);
