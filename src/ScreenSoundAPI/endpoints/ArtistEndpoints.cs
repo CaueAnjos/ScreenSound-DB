@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using ScreenSoundAPI.dto;
-using ScreenSoundAPI.Request;
 using ScreenSoundCore.Banco;
 
 namespace ScreenSoundAPI.endpoints;
@@ -11,15 +10,10 @@ internal static class ArtistEndpoints
     {
         app.MapGet(
                 "/Artistas",
-                ([FromServices] IDal db) =>
+                ([FromServices] MusicsContext db) =>
                 {
-                    var artistas = db.Artistas.GetAll().ToArray();
-                    if (artistas is null)
-                        return Results.NotFound();
-
-                    var responce = artistas.Select(a => a.GetResponse()).ToArray();
-
-                    return Results.Ok(responce);
+                    var artists = db.Artists.ToArray();
+                    return Results.Ok(artists.Select(a => (DefaultArtistResponse)a));
                 }
             )
             .WithName("Artistas")
