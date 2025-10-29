@@ -8,6 +8,6 @@ public static class GeneroResponseExtations
 {
     public static DefaultGenreResponse GetResponse(this Genre genero)
     {
-        return new DefaultGenreResponse(genero.Name, genero.Descricao);
+        return new DefaultGenreResponse(genero.Name, genero.Description);
     }
 }
