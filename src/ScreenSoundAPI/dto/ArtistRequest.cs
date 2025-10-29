@@ -3,7 +3,20 @@ using ScreenSoundCore.Modelos;
 
 namespace ScreenSoundAPI.dto;
 
-public record DefaultArtistRequest(string Name, string Bio, ICollection<DefaultMusicRequest> Musics);
+public record DefaultArtistRequest(string Name, string Bio, string PerfilPhoto, ICollection<DefaultMusicRequest> Musics)
+{
+    public static implicit operator Artist(DefaultArtistRequest request)
+    {
+        return new Artist
+        {
+            Name = request.Name,
+            Bio = request.Bio,
+            PerfilPhoto = request.PerfilPhoto,
+            Musics = [.. request.Musics.Select(r => (Music)r)],
+        };
+    }
+}
+
 public record UpdateArtistaRequest(int Id, string Name, string Bio, string PerfilPhoto, ICollection<DefaultMusicRequest> Musics);
 
 [Obsolete("Use only the dto convertion methods")]
