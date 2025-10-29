@@ -1,7 +1,7 @@
 using ScreenSoundCore.Banco;
 using ScreenSoundCore.Modelos;
 
-namespace ScreenSoundAPI.Request;
+namespace ScreenSoundAPI.dto;
 
 public record GeneroRequest(string Name, string Description);
 
