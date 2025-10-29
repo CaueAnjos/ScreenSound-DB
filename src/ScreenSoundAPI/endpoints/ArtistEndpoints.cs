@@ -13,7 +13,7 @@ internal static class ArtistEndpoints
                 "/Artistas",
                 async ([FromServices] MusicsContext db) =>
                 {
-                    var artists = db.Artists.ToListAsync();
+                    var artists = await db.Artists.ToListAsync();
                     return Results.Ok(artists.Select(a => (DefaultArtistResponse)a));
                 }
             )
