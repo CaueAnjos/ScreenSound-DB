@@ -3,7 +3,19 @@ using ScreenSoundCore.Modelos;
 
 namespace ScreenSoundAPI.dto;
 
-public record DefaultArtistResponse(int Id, string Name, string Bio, string PerfilPhoto, ICollection<MusicaResponse> Musics);
+public record DefaultArtistResponse(int Id, string Name, string Bio, string? PerfilPhoto, ICollection<DefaultMusicResponse>? Musics)
+{
+    public static implicit operator DefaultArtistResponse(Artist artist)
+    {
+        return new DefaultArtistResponse(
+                artist.Id,
+                artist.Name,
+                artist.Bio,
+                artist.PerfilPhoto,
+                artist.Musics?.Select(m => (DefaultMusicResponse)m).ToArray()
+                );
+    }
+}
 
 public static class ArtistaResponseExtations
 {
