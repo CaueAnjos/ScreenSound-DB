@@ -1,12 +1,13 @@
+using ScreenSoundAPI.dto;
 using ScreenSoundCore.Banco;
 using ScreenSoundCore.Modelos;
 
 namespace ScreenSoundAPI.Request;
 
-public record MusicaRequest(string Name, ICollection<GeneroRequest> Generos);
+public record MusicaRequest(string Name, ICollection<DefaultGenreRequest> Generos);
 
 // NOTE: this is use on UpdateMusica!
-public record UpdateMusicaRequest(int Id, string Name, DateTime Date, ICollection<GeneroRequest> Generos, int ArtistaId = -1);
+public record UpdateMusicaRequest(int Id, string Name, DateTime Date, ICollection<DefaultGenreRequest> Generos, int ArtistaId = -1);
 
 public static class MusicaRequestExtations
 {
