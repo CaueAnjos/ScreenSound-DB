@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ScreenSoundAPI.dto;
 using ScreenSoundCore.Banco;
 
@@ -10,9 +11,9 @@ internal static class ArtistEndpoints
     {
         app.MapGet(
                 "/Artistas",
-                ([FromServices] MusicsContext db) =>
+                async ([FromServices] MusicsContext db) =>
                 {
-                    var artists = db.Artists.ToArray();
+                    var artists = db.Artists.ToListAsync();
                     return Results.Ok(artists.Select(a => (DefaultArtistResponse)a));
                 }
             )
