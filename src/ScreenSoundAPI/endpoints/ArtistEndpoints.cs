@@ -22,13 +22,13 @@ internal static class ArtistEndpoints
 
         app.MapGet(
                 "/Artistas/{id}",
-                ([FromServices] IDal db, int id) =>
+                async ([FromServices] MusicsContext db, int id) =>
                 {
-                    var artista = db.Artistas.GetById(id);
-                    if (artista is null)
+                    var artist = await db.Artists.FirstOrDefaultAsync(a => a.Id == id);
+                    if (artist is null)
                         return Results.NotFound();
                     else
-                        return Results.Ok(artista.GetResponse());
+                        return Results.Ok((DefaultArtistResponse)artist);
                 }
             )
             .WithName("ArtistaPorId")
