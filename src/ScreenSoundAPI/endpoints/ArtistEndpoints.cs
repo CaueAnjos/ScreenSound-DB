@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ScreenSoundAPI.dto;
 using ScreenSoundCore.Banco;
+using ScreenSoundCore.Modelos;
 
 namespace ScreenSoundAPI.endpoints;
 
@@ -36,14 +37,16 @@ internal static class ArtistEndpoints
 
         app.MapPost(
                 "/Artistas",
-                ([FromServices] IDal db, [FromBody] DefaultArtistRequest artista) =>
+                async ([FromServices] MusicsContext db, [FromBody] DefaultArtistRequest resquest) =>
                 {
-                    var artistaAdded = artista.TryGetObject(db);
-                    if (artistaAdded is not null)
+                    Artist artistToAdd = resquest;
+
+                    if (await db.Artists.AnyAsync(a => string.Equals(a.Name.ToLower(), artistToAdd.Name.ToLower())))
                         return Results.Conflict();
 
-                    artistaAdded = artista.ConvertToObject(db);
-                    return Results.Created($"/Artistas/{artistaAdded.Id}", artistaAdded);
+                    await db.Artists.AddAsync(artistToAdd);
+                    await db.SaveChangesAsync();
+                    return Results.Created($"/Artistas/{artistToAdd.Id}", (DefaultArtistResponse)artistToAdd);
                 }
             )
             .WithName("AddArtista")
