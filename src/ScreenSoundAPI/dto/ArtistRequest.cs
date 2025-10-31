@@ -17,7 +17,7 @@ public record DefaultArtistRequest(string Name, string Bio, string PerfilPhoto, 
     }
 }
 
-public record UpdateArtistaRequest(int Id, string Name, string Bio, string PerfilPhoto, ICollection<DefaultMusicRequest> Musics);
+public record UpdateArtistaRequest(string? Name, string? Bio, string? PerfilPhoto, ICollection<int>? MusicsId);
 
 [Obsolete("Use only the dto convertion methods")]
 public static class ArtistaRequestExtations

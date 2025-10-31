@@ -69,13 +69,33 @@ internal static class ArtistEndpoints
             .WithOpenApi();
 
         app.MapPut(
-                "/Artistas",
-                ([FromServices] IDal db, [FromBody] UpdateArtistaRequest artista) =>
+                "/Artistas/{id}",
+                async ([FromServices] MusicsContext db, [FromBody] UpdateArtistaRequest request, int id) =>
                 {
-                    bool result = artista.TryUpdateObject(db);
-                    if (result == true)
-                        return Results.Ok();
-                    return Results.NotFound();
+                    Artist? artist = await db.Artists.FirstOrDefaultAsync(a => a.Id == id);
+
+                    if (artist is null)
+                        return Results.NotFound();
+
+                    artist.Name = request.Name ?? artist.Name;
+                    artist.Bio = request.Bio ?? artist.Bio;
+                    artist.PerfilPhoto = request.PerfilPhoto ?? artist.PerfilPhoto;
+
+                    if (request.MusicsId is not null)
+                    {
+                        var newMusics = await db.Musics.Where(m => request.MusicsId.Contains(m.Id)).ToListAsync();
+
+                        if (newMusics.Count != request.MusicsId.Count)
+                            return Results.BadRequest("One or more musicIds are not correct!");
+
+                        artist.Musics ??= [];
+                        artist.Musics.Clear();
+
+                        foreach (var music in newMusics)
+                            artist.Musics.Add(music);
+                    }
+
+                    return Results.Ok<DefaultArtistResponse>(artist);
                 }
             )
             .WithName("UpdateArtista")
