@@ -54,13 +54,14 @@ internal static class ArtistEndpoints
 
         app.MapDelete(
                 "/Artistas/{id}",
-                ([FromServices] IDal db, int id) =>
+                async ([FromServices] MusicsContext db, int id) =>
                 {
-                    var artista = db.Artistas.GetById(id);
-                    if (artista is null)
+                    var artist = await db.Artists.FirstOrDefaultAsync(a => a.Id == id);
+                    if (artist is null)
                         return Results.NotFound();
 
-                    db.Artistas.Remove(artista);
+                    db.Artists.Remove(artist);
+                    await db.SaveChangesAsync();
                     return Results.NoContent();
                 }
             )
