@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ScreenSoundAPI.dto;
 using ScreenSoundAPI.Request;
 using ScreenSoundCore.Banco;
+using ScreenSoundCore.Modelos;
 
 namespace ScreenSoundAPI.endpoints;
 
@@ -23,13 +24,13 @@ internal static class MusicEndpoints
 
         app.MapGet(
                     "/Musicas/{id}",
-                    ([FromServices] IDal db, int id) =>
+                    async ([FromServices] MusicsContext db, int id) =>
                     {
-                        var musica = db.Musicas.GetById(id);
-                        if (musica is null)
+                        var music = await db.Musics.FirstOrDefaultAsync(m => m.Id == id);
+                        if (music is null)
                             return Results.NotFound();
                         else
-                            return Results.Ok(musica.GetResponse());
+                            return Results.Ok((DefaultMusicResponse)music);
                     }
                 )
                 .WithName("MusicasPorId")
@@ -37,14 +38,16 @@ internal static class MusicEndpoints
 
         app.MapPost(
                         "/Musicas",
-                        ([FromServices] IDal db, [FromBody] DefaultMusicRequest musica) =>
+                        async ([FromServices] MusicsContext db, [FromBody] DefaultMusicRequest request) =>
                         {
-                            var musicaAdded = musica.TryGetObject(db);
-                            if (musicaAdded is not null)
+                            Music musicToAdd = request;
+
+                            if (await db.Musics.AnyAsync(m => string.Equals(m.Name.ToLower(), musicToAdd.Name.ToLower())))
                                 return Results.Conflict();
 
-                            musicaAdded = musica.ConvertToObject(db);
-                            return Results.Created($"/Musicas/{musicaAdded.Id}", musicaAdded);
+                            await db.Musics.AddAsync(musicToAdd);
+                            await db.SaveChangesAsync();
+                            return Results.Created($"/Musicas/{musicToAdd}.Id", (DefaultMusicResponse)musicToAdd);
                         }
                     )
                     .WithName("AddMusicas")
@@ -52,13 +55,14 @@ internal static class MusicEndpoints
 
         app.MapDelete(
                     "/Musicas/{id}",
-                    ([FromServices] IDal db, int id) =>
+                    async ([FromServices] MusicsContext db, int id) =>
                     {
-                        var musica = db.Musicas.GetById(id);
-                        if (musica is null)
+                        var music = await db.Musics.FirstOrDefaultAsync(m => m.Id == id);
+                        if (music is null)
                             return Results.NotFound();
 
-                        db.Musicas.Remove(musica);
+                        db.Musics.Remove(music);
+                        await db.SaveChangesAsync();
                         return Results.NoContent();
                     }
                 )
@@ -66,13 +70,49 @@ internal static class MusicEndpoints
                 .WithOpenApi();
 
         app.MapPut(
-                "/Musicas",
-                ([FromServices] IDal db, [FromBody] UpdateMusicaRequest musica) =>
+                "/Musicas/{id}",
+                async ([FromServices] MusicsContext db, [FromBody] UpdateMusicRequest request, int id) =>
                 {
-                    bool result = musica.TryUpdateObject(db);
-                    if (result == true)
-                        return Results.Ok();
-                    return Results.NotFound();
+                    Music? music = await db.Musics.FirstOrDefaultAsync(m => m.Id == id);
+                    if (music is null)
+                        return Results.NotFound();
+
+                    music.Name = request.Name ?? music.Name;
+                    music.ReleaseDate = request.ReleaseDate ?? music.ReleaseDate;
+
+                    if (request.ArtistId is null)
+                    {
+                        music.Artist = null;
+                        return Results.Ok<DefaultMusicResponse>(music);
+                    }
+                    else if (request.ArtistId >= 0)
+                    {
+                        Artist? artist = await db.Artists.FirstOrDefaultAsync(a => a.Id == request.ArtistId);
+
+                        if (artist is null)
+                            return Results.BadRequest("ArtistId is not correct!");
+
+                        music.Artist = artist;
+                    }
+
+                    if (request.GenresId is not null)
+                    {
+                        var newGenres = await db.Genres.Where(g => request.GenresId.Contains(g.Id)).ToListAsync();
+
+                        if (newGenres.Count != request.GenresId.Count)
+                            return Results.BadRequest("One or more genresId are not correct!");
+
+                        music.Genres ??= [];
+                        music.Genres.Clear();
+
+                        foreach (var genre in newGenres)
+                        {
+                            music.Genres.Add(genre);
+                        }
+                    }
+
+                    await db.SaveChangesAsync();
+                    return Results.Ok<DefaultMusicResponse>(music);
                 }
             )
             .WithName("UpdateMusica")
