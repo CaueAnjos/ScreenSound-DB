@@ -70,7 +70,7 @@ internal static class ArtistEndpoints
 
         app.MapPut(
                 "/Artistas/{id}",
-                async ([FromServices] MusicsContext db, [FromBody] UpdateArtistaRequest request, int id) =>
+                async ([FromServices] MusicsContext db, [FromBody] UpdateArtistRequest request, int id) =>
                 {
                     Artist? artist = await db.Artists.FirstOrDefaultAsync(a => a.Id == id);
 
@@ -94,6 +94,8 @@ internal static class ArtistEndpoints
                         foreach (var music in newMusics)
                             artist.Musics.Add(music);
                     }
+
+                    await db.SaveChangesAsync();
 
                     return Results.Ok<DefaultArtistResponse>(artist);
                 }
