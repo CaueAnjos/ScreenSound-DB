@@ -22,7 +22,15 @@ public class MusicsContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Music>().HasMany(c => c.Genres).WithMany(c => c.Musics);
+        modelBuilder.Entity<Music>()
+            .HasMany(c => c.Genres)
+            .WithMany(c => c.Musics);
+
+        modelBuilder.Entity<Artist>()
+            .HasMany(c => c.Musics)
+            .WithOne(c => c.Artist)
+            .OnDelete(DeleteBehavior.SetNull);
+
     }
 }
 
