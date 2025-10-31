@@ -1,11 +1,13 @@
 using System.Text.Json.Serialization;
+using Scalar.AspNetCore;
 using ScreenSoundAPI.endpoints;
 using ScreenSoundCore.Banco;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddOpenApi();
+
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
     options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles
 );
@@ -18,8 +20,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.MapScalarApiReference();
+    app.MapOpenApi();
 }
 
 app.UseHttpsRedirection();
