@@ -80,19 +80,16 @@ internal static class MusicEndpoints
                     music.Name = request.Name ?? music.Name;
                     music.ReleaseDate = request.ReleaseDate ?? music.ReleaseDate;
 
-                    if (request.ArtistId is null)
-                    {
-                        music.Artist = null;
-                        return Results.Ok<DefaultMusicResponse>(music);
-                    }
-                    else if (request.ArtistId >= 0)
+                    if (request.ArtistId > 0)
                     {
                         Artist? artist = await db.Artists.FirstOrDefaultAsync(a => a.Id == request.ArtistId);
-
                         if (artist is null)
                             return Results.BadRequest("ArtistId is not correct!");
-
-                        music.Artist = artist;
+                        music.ArtistId = request.ArtistId;
+                    }
+                    else if (request.ArtistId is null || request.ArtistId == 0)
+                    {
+                        music.ArtistId = null;
                     }
 
                     if (request.GenresId is not null)
