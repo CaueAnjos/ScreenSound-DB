@@ -23,9 +23,14 @@
               sdk_8_0
               sdk_9_0
             ])
+          openssl
           dotnet-ef
           docker_25
         ];
+
+        env = {
+          LD_LIBRARY_PATH = "${pkgs.openssl.out}/lib:$LD_LIBRARY_PATH";
+        };
       };
     });
   };
