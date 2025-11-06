@@ -1,3 +1,4 @@
+using System.Text;
 using ScreenSoundCore.Banco;
 using ScreenSoundCore.Modelos;
 
@@ -12,6 +13,27 @@ public record DefaultGenreRequest(string Name, string Description)
             Name = request.Name,
             Description = request.Description,
         };
+    }
+
+    public bool Validate(out string message)
+    {
+        var messageBuilder = new StringBuilder("Genre request not valid:\n");
+        bool isValid = true;
+
+        if (Name is null)
+        {
+            messageBuilder.AppendLine("- Name need to be set");
+            isValid = false;
+        }
+
+        if (Description is null)
+        {
+            messageBuilder.AppendLine("- Description need to be set");
+            isValid = false;
+        }
+
+        message = isValid ? string.Empty : messageBuilder.ToString();
+        return isValid;
     }
 }
 
