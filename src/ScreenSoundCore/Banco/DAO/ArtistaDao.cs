@@ -30,12 +30,6 @@ internal class ArtistaDao(MusicsContext context) : IDao<Artist>
 
     public void Remove(Artist artista)
     {
-        foreach (var musica in artista.Musics)
-        {
-            musica.Artist = null;
-            _context.Musics.Update(musica);
-        }
-
         _context.Artists.Remove(artista);
         _context.SaveChanges();
     }

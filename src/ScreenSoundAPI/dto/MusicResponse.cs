@@ -1,7 +1,6 @@
-using ScreenSoundAPI.dto;
 using ScreenSoundCore.Modelos;
 
-namespace ScreenSoundAPI.Request;
+namespace ScreenSoundAPI.dto;
 
 public record DefaultMusicResponse(int Id, string Name, DateTime? ReleaseDate, int? ArtistId, ICollection<DefaultGenreResponse>? Genres)
 {
@@ -22,7 +21,7 @@ public static class MusicaResponseExtations
     public static DefaultMusicResponse GetResponse(this Music musica)
     {
         int? artistaId = musica.Artist?.Id ?? null;
-        var generos = musica.Genres.Select(g => g.GetResponse()).ToList();
+        var generos = musica.Genres?.Select(g => g.GetResponse()).ToList();
         return new DefaultMusicResponse(musica.Id, musica.Name, musica.ReleaseDate, artistaId, generos);
     }
 }

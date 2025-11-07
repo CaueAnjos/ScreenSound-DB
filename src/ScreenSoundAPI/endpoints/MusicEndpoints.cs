@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ScreenSoundAPI.dto;
-using ScreenSoundAPI.Request;
 using ScreenSoundCore.Banco;
 using ScreenSoundCore.Modelos;
 

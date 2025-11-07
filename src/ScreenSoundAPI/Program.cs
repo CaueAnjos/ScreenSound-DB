@@ -13,7 +13,6 @@ builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =
 );
 
 builder.Services.AddDbContext<MusicsContext>();
-builder.Services.AddTransient<IDal, MyDataBaseEntity>();
 
 var app = builder.Build();
 
