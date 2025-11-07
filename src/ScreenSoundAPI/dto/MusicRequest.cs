@@ -10,7 +10,7 @@ public record DefaultMusicRequest(string Name, ICollection<DefaultGenreRequest>?
         return new Music
         {
             Name = request.Name,
-            Genres = request.Genres is not null ? [.. request.Genres.Select(r => (Genre)r)] : null,
+            Genres = request.Genres?.Select(r => (Genre)r).ToList(),
         };
     }
 

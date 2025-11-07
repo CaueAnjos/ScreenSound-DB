@@ -12,7 +12,7 @@ public record DefaultArtistRequest(string Name, string Bio, string? PerfilPhoto,
             Name = request.Name,
             Bio = request.Bio,
             PerfilPhoto = request.PerfilPhoto,
-            Musics = request.Musics is not null ? [.. request.Musics.Select(r => (Music)r)] : null,
+            Musics = request.Musics?.Select(r => (Music)r).ToList(),
         };
     }
 
