@@ -37,6 +37,8 @@ public record DefaultGenreRequest(string Name, string Description)
     }
 }
 
+public record UpdateGenreRequest(string? Name, string? Description);
+
 [Obsolete("Use only the dto convertion methods")]
 public static class GeneroRequestExtations
 {

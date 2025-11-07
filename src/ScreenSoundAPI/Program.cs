@@ -26,6 +26,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.AddArtistEndpoints();
-app.AddMusicasEndpoints();
+app.AddMusicsEndpoints();
+app.AddGenresEndpoints();
 
 app.Run();
