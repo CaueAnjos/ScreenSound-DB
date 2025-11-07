@@ -8,7 +8,7 @@ namespace ScreenSoundAPI.endpoints;
 
 internal static class MusicEndpoints
 {
-    public static void AddMusicasEndpoints(this WebApplication app)
+    public static void AddMusicsEndpoints(this WebApplication app)
     {
         app.MapGet(
                 "/Musicas",
