@@ -37,9 +37,12 @@ internal static class ArtistEndpoints
 
         app.MapPost(
                 "/Artistas",
-                async ([FromServices] MusicsContext db, [FromBody] DefaultArtistRequest resquest) =>
+                async ([FromServices] MusicsContext db, [FromBody] DefaultArtistRequest request) =>
                 {
-                    Artist artistToAdd = resquest;
+                    bool isValid = request.Validate(out string message);
+                    Artist artistToAdd = request;
+                    if (!isValid)
+                        return Results.BadRequest(message);
 
                     if (await db.Artists.AnyAsync(a => string.Equals(a.Name.ToLower(), artistToAdd.Name.ToLower())))
                         return Results.Conflict();
