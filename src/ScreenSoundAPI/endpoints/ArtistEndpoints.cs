@@ -44,12 +44,19 @@ internal static class ArtistEndpoints
                     if (!isValid)
                         return Results.BadRequest(message);
 
-                    if (await db.Artists.AnyAsync(a => string.Equals(a.Name.ToLower(), artistToAdd.Name.ToLower())))
+                    if (
+                        await db.Artists.AnyAsync(a =>
+                            string.Equals(a.Name.ToLower(), artistToAdd.Name.ToLower())
+                        )
+                    )
                         return Results.Conflict();
 
                     await db.Artists.AddAsync(artistToAdd);
                     await db.SaveChangesAsync();
-                    return Results.Created($"/Artistas/{artistToAdd.Id}", (DefaultArtistResponse)artistToAdd);
+                    return Results.Created(
+                        $"/Artistas/{artistToAdd.Id}",
+                        (DefaultArtistResponse)artistToAdd
+                    );
                 }
             )
             .WithName("AddArtista")
@@ -73,7 +80,11 @@ internal static class ArtistEndpoints
 
         app.MapPut(
                 "/Artistas/{id}",
-                async ([FromServices] MusicsContext db, [FromBody] UpdateArtistRequest request, int id) =>
+                async (
+                    [FromServices] MusicsContext db,
+                    [FromBody] UpdateArtistRequest request,
+                    int id
+                ) =>
                 {
                     Artist? artist = await db.Artists.FirstOrDefaultAsync(a => a.Id == id);
 
@@ -86,7 +97,9 @@ internal static class ArtistEndpoints
 
                     if (request.MusicsId is not null)
                     {
-                        var newMusics = await db.Musics.Where(m => request.MusicsId.Contains(m.Id)).ToListAsync();
+                        var newMusics = await db
+                            .Musics.Where(m => request.MusicsId.Contains(m.Id))
+                            .ToListAsync();
 
                         if (newMusics.Count != request.MusicsId.Count)
                             return Results.BadRequest("One or more musicIds are not correct!");

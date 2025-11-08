@@ -9,9 +9,7 @@ public class Music
         Genres = new List<Genre>();
     }
 
-    public Music()
-    {
-    }
+    public Music() { }
 
     public int Id { get; set; }
     public required string Name { get; set; }

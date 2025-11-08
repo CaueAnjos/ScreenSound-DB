@@ -14,19 +14,22 @@ namespace ScreenSoundCore.Migrations
                 name: "ArtistaId",
                 table: "Musicas",
                 type: "int",
-                nullable: true);
+                nullable: true
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_Musicas_ArtistaId",
                 table: "Musicas",
-                column: "ArtistaId");
+                column: "ArtistaId"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Musicas_Artistas_ArtistaId",
                 table: "Musicas",
                 column: "ArtistaId",
                 principalTable: "Artistas",
-                principalColumn: "Id");
+                principalColumn: "Id"
+            );
         }
 
         /// <inheritdoc />
@@ -34,15 +37,12 @@ namespace ScreenSoundCore.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_Musicas_Artistas_ArtistaId",
-                table: "Musicas");
+                table: "Musicas"
+            );
 
-            migrationBuilder.DropIndex(
-                name: "IX_Musicas_ArtistaId",
-                table: "Musicas");
+            migrationBuilder.DropIndex(name: "IX_Musicas_ArtistaId", table: "Musicas");
 
-            migrationBuilder.DropColumn(
-                name: "ArtistaId",
-                table: "Musicas");
+            migrationBuilder.DropColumn(name: "ArtistaId", table: "Musicas");
         }
     }
 }

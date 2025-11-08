@@ -15,7 +15,7 @@ namespace ScreenSoundCore.Migrations
                 columns: table => new
                 {
                     GenerosId = table.Column<int>(type: "int", nullable: false),
-                    MusicasId = table.Column<int>(type: "int", nullable: false)
+                    MusicasId = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -25,26 +25,29 @@ namespace ScreenSoundCore.Migrations
                         column: x => x.GenerosId,
                         principalTable: "Genero",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade
+                    );
                     table.ForeignKey(
                         name: "FK_GeneroMusica_Musicas_MusicasId",
                         column: x => x.MusicasId,
                         principalTable: "Musicas",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+                        onDelete: ReferentialAction.Cascade
+                    );
+                }
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_GeneroMusica_MusicasId",
                 table: "GeneroMusica",
-                column: "MusicasId");
+                column: "MusicasId"
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "GeneroMusica");
+            migrationBuilder.DropTable(name: "GeneroMusica");
         }
     }
 }

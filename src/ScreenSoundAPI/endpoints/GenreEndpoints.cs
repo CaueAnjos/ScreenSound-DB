@@ -22,58 +22,69 @@ internal static class GenreEndpoints
             .WithOpenApi();
 
         app.MapGet(
-                    "/Generos/{id}",
-                    async ([FromServices] MusicsContext db, int id) =>
-                    {
-                        var genres = await db.Genres.FirstOrDefaultAsync(m => m.Id == id);
-                        if (genres is null)
-                            return Results.NotFound();
-                        else
-                            return Results.Ok((DefaultGenreResponse)genres);
-                    }
-                )
-                .WithName("GenerosPorId")
-                .WithOpenApi();
+                "/Generos/{id}",
+                async ([FromServices] MusicsContext db, int id) =>
+                {
+                    var genres = await db.Genres.FirstOrDefaultAsync(m => m.Id == id);
+                    if (genres is null)
+                        return Results.NotFound();
+                    else
+                        return Results.Ok((DefaultGenreResponse)genres);
+                }
+            )
+            .WithName("GenerosPorId")
+            .WithOpenApi();
 
         app.MapPost(
-                        "/Generos",
-                        async ([FromServices] MusicsContext db, [FromBody] DefaultGenreRequest request) =>
-                        {
-                            bool isValid = request.Validate(out string message);
-                            Genre GenreToAdd = request;
-                            if (!isValid)
-                                return Results.BadRequest(message);
+                "/Generos",
+                async ([FromServices] MusicsContext db, [FromBody] DefaultGenreRequest request) =>
+                {
+                    bool isValid = request.Validate(out string message);
+                    Genre GenreToAdd = request;
+                    if (!isValid)
+                        return Results.BadRequest(message);
 
-                            if (await db.Genres.AnyAsync(m => string.Equals(m.Name.ToLower(), GenreToAdd.Name.ToLower())))
-                                return Results.Conflict();
-
-                            await db.Genres.AddAsync(GenreToAdd);
-                            await db.SaveChangesAsync();
-                            return Results.Created($"/Generos/{GenreToAdd}.Id", (DefaultGenreResponse)GenreToAdd);
-                        }
+                    if (
+                        await db.Genres.AnyAsync(m =>
+                            string.Equals(m.Name.ToLower(), GenreToAdd.Name.ToLower())
+                        )
                     )
-                    .WithName("AddGeneros")
-                    .WithOpenApi();
+                        return Results.Conflict();
+
+                    await db.Genres.AddAsync(GenreToAdd);
+                    await db.SaveChangesAsync();
+                    return Results.Created(
+                        $"/Generos/{GenreToAdd}.Id",
+                        (DefaultGenreResponse)GenreToAdd
+                    );
+                }
+            )
+            .WithName("AddGeneros")
+            .WithOpenApi();
 
         app.MapDelete(
-                    "/Generos/{id}",
-                    async ([FromServices] MusicsContext db, int id) =>
-                    {
-                        var genre = await db.Genres.FirstOrDefaultAsync(m => m.Id == id);
-                        if (genre is null)
-                            return Results.NotFound();
+                "/Generos/{id}",
+                async ([FromServices] MusicsContext db, int id) =>
+                {
+                    var genre = await db.Genres.FirstOrDefaultAsync(m => m.Id == id);
+                    if (genre is null)
+                        return Results.NotFound();
 
-                        db.Genres.Remove(genre);
-                        await db.SaveChangesAsync();
-                        return Results.NoContent();
-                    }
-                )
-                .WithName("DeleteGenero")
-                .WithOpenApi();
+                    db.Genres.Remove(genre);
+                    await db.SaveChangesAsync();
+                    return Results.NoContent();
+                }
+            )
+            .WithName("DeleteGenero")
+            .WithOpenApi();
 
         app.MapPut(
                 "/Generos/{id}",
-                async ([FromServices] MusicsContext db, [FromBody] UpdateGenreRequest request, int id) =>
+                async (
+                    [FromServices] MusicsContext db,
+                    [FromBody] UpdateGenreRequest request,
+                    int id
+                ) =>
                 {
                     Genre? genre = await db.Genres.FirstOrDefaultAsync(m => m.Id == id);
                     if (genre is null)

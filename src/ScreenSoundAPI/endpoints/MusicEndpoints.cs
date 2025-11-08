@@ -22,58 +22,69 @@ internal static class MusicEndpoints
             .WithOpenApi();
 
         app.MapGet(
-                    "/Musicas/{id}",
-                    async ([FromServices] MusicsContext db, int id) =>
-                    {
-                        var music = await db.Musics.FirstOrDefaultAsync(m => m.Id == id);
-                        if (music is null)
-                            return Results.NotFound();
-                        else
-                            return Results.Ok((DefaultMusicResponse)music);
-                    }
-                )
-                .WithName("MusicasPorId")
-                .WithOpenApi();
+                "/Musicas/{id}",
+                async ([FromServices] MusicsContext db, int id) =>
+                {
+                    var music = await db.Musics.FirstOrDefaultAsync(m => m.Id == id);
+                    if (music is null)
+                        return Results.NotFound();
+                    else
+                        return Results.Ok((DefaultMusicResponse)music);
+                }
+            )
+            .WithName("MusicasPorId")
+            .WithOpenApi();
 
         app.MapPost(
-                        "/Musicas",
-                        async ([FromServices] MusicsContext db, [FromBody] DefaultMusicRequest request) =>
-                        {
-                            bool isValid = request.Validate(out string message);
-                            Music musicToAdd = request;
-                            if (!isValid)
-                                return Results.BadRequest(message);
+                "/Musicas",
+                async ([FromServices] MusicsContext db, [FromBody] DefaultMusicRequest request) =>
+                {
+                    bool isValid = request.Validate(out string message);
+                    Music musicToAdd = request;
+                    if (!isValid)
+                        return Results.BadRequest(message);
 
-                            if (await db.Musics.AnyAsync(m => string.Equals(m.Name.ToLower(), musicToAdd.Name.ToLower())))
-                                return Results.Conflict();
-
-                            await db.Musics.AddAsync(musicToAdd);
-                            await db.SaveChangesAsync();
-                            return Results.Created($"/Musicas/{musicToAdd}.Id", (DefaultMusicResponse)musicToAdd);
-                        }
+                    if (
+                        await db.Musics.AnyAsync(m =>
+                            string.Equals(m.Name.ToLower(), musicToAdd.Name.ToLower())
+                        )
                     )
-                    .WithName("AddMusicas")
-                    .WithOpenApi();
+                        return Results.Conflict();
+
+                    await db.Musics.AddAsync(musicToAdd);
+                    await db.SaveChangesAsync();
+                    return Results.Created(
+                        $"/Musicas/{musicToAdd}.Id",
+                        (DefaultMusicResponse)musicToAdd
+                    );
+                }
+            )
+            .WithName("AddMusicas")
+            .WithOpenApi();
 
         app.MapDelete(
-                    "/Musicas/{id}",
-                    async ([FromServices] MusicsContext db, int id) =>
-                    {
-                        var music = await db.Musics.FirstOrDefaultAsync(m => m.Id == id);
-                        if (music is null)
-                            return Results.NotFound();
+                "/Musicas/{id}",
+                async ([FromServices] MusicsContext db, int id) =>
+                {
+                    var music = await db.Musics.FirstOrDefaultAsync(m => m.Id == id);
+                    if (music is null)
+                        return Results.NotFound();
 
-                        db.Musics.Remove(music);
-                        await db.SaveChangesAsync();
-                        return Results.NoContent();
-                    }
-                )
-                .WithName("DeleteMusica")
-                .WithOpenApi();
+                    db.Musics.Remove(music);
+                    await db.SaveChangesAsync();
+                    return Results.NoContent();
+                }
+            )
+            .WithName("DeleteMusica")
+            .WithOpenApi();
 
         app.MapPut(
                 "/Musicas/{id}",
-                async ([FromServices] MusicsContext db, [FromBody] UpdateMusicRequest request, int id) =>
+                async (
+                    [FromServices] MusicsContext db,
+                    [FromBody] UpdateMusicRequest request,
+                    int id
+                ) =>
                 {
                     Music? music = await db.Musics.FirstOrDefaultAsync(m => m.Id == id);
                     if (music is null)
@@ -84,7 +95,9 @@ internal static class MusicEndpoints
 
                     if (request.ArtistId > 0)
                     {
-                        Artist? artist = await db.Artists.FirstOrDefaultAsync(a => a.Id == request.ArtistId);
+                        Artist? artist = await db.Artists.FirstOrDefaultAsync(a =>
+                            a.Id == request.ArtistId
+                        );
                         if (artist is null)
                             return Results.BadRequest("ArtistId is not correct!");
                         music.ArtistId = request.ArtistId;
@@ -96,7 +109,9 @@ internal static class MusicEndpoints
 
                     if (request.GenresId is not null)
                     {
-                        var newGenres = await db.Genres.Where(g => request.GenresId.Contains(g.Id)).ToListAsync();
+                        var newGenres = await db
+                            .Genres.Where(g => request.GenresId.Contains(g.Id))
+                            .ToListAsync();
 
                         if (newGenres.Count != request.GenresId.Count)
                             return Results.BadRequest("One or more genresId are not correct!");

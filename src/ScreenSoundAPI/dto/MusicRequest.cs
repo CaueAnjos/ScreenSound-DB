@@ -7,10 +7,7 @@ public record DefaultMusicRequest(string Name)
 {
     public static implicit operator Music(DefaultMusicRequest request)
     {
-        return new Music
-        {
-            Name = request.Name,
-        };
+        return new Music { Name = request.Name };
     }
 
     public bool Validate(out string message)
@@ -29,4 +26,9 @@ public record DefaultMusicRequest(string Name)
     }
 }
 
-public record UpdateMusicRequest(string? Name, DateTime? ReleaseDate, ICollection<int>? GenresId, int? ArtistId = -1);
+public record UpdateMusicRequest(
+    string? Name,
+    DateTime? ReleaseDate,
+    ICollection<int>? GenresId,
+    int? ArtistId = -1
+);

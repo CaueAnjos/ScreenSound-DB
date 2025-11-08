@@ -12,20 +12,14 @@ namespace ScreenSoundCore.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_GeneroMusica_Genero_GenerosId",
-                table: "GeneroMusica");
+                table: "GeneroMusica"
+            );
 
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_Genero",
-                table: "Genero");
+            migrationBuilder.DropPrimaryKey(name: "PK_Genero", table: "Genero");
 
-            migrationBuilder.RenameTable(
-                name: "Genero",
-                newName: "Generos");
+            migrationBuilder.RenameTable(name: "Genero", newName: "Generos");
 
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_Generos",
-                table: "Generos",
-                column: "Id");
+            migrationBuilder.AddPrimaryKey(name: "PK_Generos", table: "Generos", column: "Id");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_GeneroMusica_Generos_GenerosId",
@@ -33,7 +27,8 @@ namespace ScreenSoundCore.Migrations
                 column: "GenerosId",
                 principalTable: "Generos",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
         }
 
         /// <inheritdoc />
@@ -41,20 +36,14 @@ namespace ScreenSoundCore.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_GeneroMusica_Generos_GenerosId",
-                table: "GeneroMusica");
+                table: "GeneroMusica"
+            );
 
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_Generos",
-                table: "Generos");
+            migrationBuilder.DropPrimaryKey(name: "PK_Generos", table: "Generos");
 
-            migrationBuilder.RenameTable(
-                name: "Generos",
-                newName: "Genero");
+            migrationBuilder.RenameTable(name: "Generos", newName: "Genero");
 
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_Genero",
-                table: "Genero",
-                column: "Id");
+            migrationBuilder.AddPrimaryKey(name: "PK_Genero", table: "Genero", column: "Id");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_GeneroMusica_Genero_GenerosId",
@@ -62,7 +51,8 @@ namespace ScreenSoundCore.Migrations
                 column: "GenerosId",
                 principalTable: "Genero",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
         }
     }
 }

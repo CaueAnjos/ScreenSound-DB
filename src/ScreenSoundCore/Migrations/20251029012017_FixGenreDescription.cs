@@ -13,7 +13,8 @@ namespace ScreenSoundCore.Migrations
             migrationBuilder.RenameColumn(
                 name: "Descricao",
                 table: "Genres",
-                newName: "Description");
+                newName: "Description"
+            );
         }
 
         /// <inheritdoc />
@@ -22,7 +23,8 @@ namespace ScreenSoundCore.Migrations
             migrationBuilder.RenameColumn(
                 name: "Description",
                 table: "Genres",
-                newName: "Descricao");
+                newName: "Descricao"
+            );
         }
     }
 }

@@ -10,9 +10,7 @@ namespace ScreenSoundCore.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Musics_Artists_ArtistId",
-                table: "Musics");
+            migrationBuilder.DropForeignKey(name: "FK_Musics_Artists_ArtistId", table: "Musics");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Musics_Artists_ArtistId",
@@ -20,22 +18,22 @@ namespace ScreenSoundCore.Migrations
                 column: "ArtistId",
                 principalTable: "Artists",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.SetNull);
+                onDelete: ReferentialAction.SetNull
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Musics_Artists_ArtistId",
-                table: "Musics");
+            migrationBuilder.DropForeignKey(name: "FK_Musics_Artists_ArtistId", table: "Musics");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Musics_Artists_ArtistId",
                 table: "Musics",
                 column: "ArtistId",
                 principalTable: "Artists",
-                principalColumn: "Id");
+                principalColumn: "Id"
+            );
         }
     }
 }

@@ -8,11 +8,7 @@ public record DefaultGenreRequest(string Name, string Description)
 {
     public static implicit operator Genre(DefaultGenreRequest request)
     {
-        return new Genre
-        {
-            Name = request.Name,
-            Description = request.Description,
-        };
+        return new Genre { Name = request.Name, Description = request.Description };
     }
 
     public bool Validate(out string message)
@@ -53,11 +49,7 @@ public static class GeneroRequestExtations
         if (obj is not null)
             return obj;
 
-        obj = new Genre()
-        {
-            Name = genero.Name,
-            Description = genero.Description
-        };
+        obj = new Genre() { Name = genero.Name, Description = genero.Description };
 
         db.Generos.Add(obj);
         return obj;

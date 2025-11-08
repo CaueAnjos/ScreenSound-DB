@@ -3,7 +3,12 @@ using ScreenSoundCore.Modelos;
 
 namespace ScreenSoundAPI.dto;
 
-public record DefaultArtistRequest(string Name, string Bio, string? PerfilPhoto, ICollection<DefaultMusicRequest>? Musics)
+public record DefaultArtistRequest(
+    string Name,
+    string Bio,
+    string? PerfilPhoto,
+    ICollection<DefaultMusicRequest>? Musics
+)
 {
     public static implicit operator Artist(DefaultArtistRequest request)
     {
@@ -38,10 +43,10 @@ public record DefaultArtistRequest(string Name, string Bio, string? PerfilPhoto,
             var invalidMusics = Musics
                 .Where(m => m.Validate(out string msg) == false)
                 .Select(m =>
-                        {
-                            m.Validate(out string msg);
-                            return msg;
-                        });
+                {
+                    m.Validate(out string msg);
+                    return msg;
+                });
 
             if (invalidMusics.Any())
             {
@@ -58,4 +63,9 @@ public record DefaultArtistRequest(string Name, string Bio, string? PerfilPhoto,
     }
 }
 
-public record UpdateArtistRequest(string? Name, string? Bio, string? PerfilPhoto, ICollection<int>? MusicsId);
+public record UpdateArtistRequest(
+    string? Name,
+    string? Bio,
+    string? PerfilPhoto,
+    ICollection<int>? MusicsId
+);
