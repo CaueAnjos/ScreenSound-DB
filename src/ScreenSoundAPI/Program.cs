@@ -25,7 +25,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// FIX: Posts should not have the same Name
 app.AddArtistEndpoints();
 app.AddMusicsEndpoints();
 app.AddGenresEndpoints();
