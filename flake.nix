@@ -9,14 +9,12 @@
   }:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
+      dotnet-sdk = pkgs.dotnetCorePackages.sdk_9_0;
+      dotnet-runtime = pkgs.dotnetCorePackages.aspnetcore_9_0;
     in {
       devShells.default = pkgs.mkShell {
         packages = with pkgs; [
-          (with dotnetCorePackages;
-            combinePackages [
-              sdk_8_0
-              sdk_9_0
-            ])
+          dotnet-sdk
           csharpier
 
           openssl
@@ -27,6 +25,16 @@
         env = {
           LD_LIBRARY_PATH = "${pkgs.openssl.out}/lib:$LD_LIBRARY_PATH";
         };
+      };
+
+      packages.default = pkgs.buildDotnetModule {
+        pname = "ScreenSoundAPI";
+        version = "0.0.0";
+        src = ./.;
+        projectFile = "src/ScreenSoundAPI/ScreenSoundAPI.csproj";
+        inherit dotnet-sdk;
+        inherit dotnet-runtime;
+        nugetDeps = ./deps.json;
       };
     });
 }
