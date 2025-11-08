@@ -23,6 +23,8 @@
               sdk_8_0
               sdk_9_0
             ])
+          csharpier
+
           openssl
           dotnet-ef
           docker_25
