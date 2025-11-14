@@ -11,7 +11,7 @@ internal static class MusicEndpoints
     public static void AddMusicsEndpoints(this WebApplication app)
     {
         app.MapGet(
-                "/Musicas",
+                "/musicas",
                 async ([FromServices] MusicsContext db) =>
                 {
                     var musics = await db.Musics.ToListAsync();
@@ -22,7 +22,7 @@ internal static class MusicEndpoints
             .WithOpenApi();
 
         app.MapGet(
-                "/Musicas/{id}",
+                "/musicas/{id}",
                 async ([FromServices] MusicsContext db, int id) =>
                 {
                     var music = await db.Musics.FirstOrDefaultAsync(m => m.Id == id);
@@ -36,7 +36,7 @@ internal static class MusicEndpoints
             .WithOpenApi();
 
         app.MapPost(
-                "/Musicas",
+                "/musicas",
                 async ([FromServices] MusicsContext db, [FromBody] DefaultMusicRequest request) =>
                 {
                     bool isValid = request.Validate(out string message);
@@ -63,7 +63,7 @@ internal static class MusicEndpoints
             .WithOpenApi();
 
         app.MapDelete(
-                "/Musicas/{id}",
+                "/musicas/{id}",
                 async ([FromServices] MusicsContext db, int id) =>
                 {
                     var music = await db.Musics.FirstOrDefaultAsync(m => m.Id == id);
@@ -79,7 +79,7 @@ internal static class MusicEndpoints
             .WithOpenApi();
 
         app.MapPut(
-                "/Musicas/{id}",
+                "/musicas/{id}",
                 async (
                     [FromServices] MusicsContext db,
                     [FromBody] UpdateMusicRequest request,

@@ -11,7 +11,7 @@ internal static class GenreEndpoints
     public static void AddGenresEndpoints(this WebApplication app)
     {
         app.MapGet(
-                "/Generos",
+                "/generos",
                 async ([FromServices] MusicsContext db) =>
                 {
                     var genres = await db.Genres.ToListAsync();
@@ -22,7 +22,7 @@ internal static class GenreEndpoints
             .WithOpenApi();
 
         app.MapGet(
-                "/Generos/{id}",
+                "/generos/{id}",
                 async ([FromServices] MusicsContext db, int id) =>
                 {
                     var genres = await db.Genres.FirstOrDefaultAsync(m => m.Id == id);
@@ -36,7 +36,7 @@ internal static class GenreEndpoints
             .WithOpenApi();
 
         app.MapPost(
-                "/Generos",
+                "/generos",
                 async ([FromServices] MusicsContext db, [FromBody] DefaultGenreRequest request) =>
                 {
                     bool isValid = request.Validate(out string message);
@@ -63,7 +63,7 @@ internal static class GenreEndpoints
             .WithOpenApi();
 
         app.MapDelete(
-                "/Generos/{id}",
+                "/generos/{id}",
                 async ([FromServices] MusicsContext db, int id) =>
                 {
                     var genre = await db.Genres.FirstOrDefaultAsync(m => m.Id == id);
@@ -79,7 +79,7 @@ internal static class GenreEndpoints
             .WithOpenApi();
 
         app.MapPut(
-                "/Generos/{id}",
+                "/generos/{id}",
                 async (
                     [FromServices] MusicsContext db,
                     [FromBody] UpdateGenreRequest request,

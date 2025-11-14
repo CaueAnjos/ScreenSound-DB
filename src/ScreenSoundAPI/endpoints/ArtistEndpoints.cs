@@ -11,7 +11,7 @@ internal static class ArtistEndpoints
     public static void AddArtistEndpoints(this WebApplication app)
     {
         app.MapGet(
-                "/Artistas",
+                "/artistas",
                 async ([FromServices] MusicsContext db) =>
                 {
                     var artists = await db.Artists.ToListAsync();
@@ -22,7 +22,7 @@ internal static class ArtistEndpoints
             .WithOpenApi();
 
         app.MapGet(
-                "/Artistas/{id}",
+                "/artistas/{id}",
                 async ([FromServices] MusicsContext db, int id) =>
                 {
                     var artist = await db.Artists.FirstOrDefaultAsync(a => a.Id == id);
@@ -36,7 +36,7 @@ internal static class ArtistEndpoints
             .WithOpenApi();
 
         app.MapPost(
-                "/Artistas",
+                "/artistas",
                 async ([FromServices] MusicsContext db, [FromBody] DefaultArtistRequest request) =>
                 {
                     bool isValid = request.Validate(out string message);
@@ -63,7 +63,7 @@ internal static class ArtistEndpoints
             .WithOpenApi();
 
         app.MapDelete(
-                "/Artistas/{id}",
+                "/artistas/{id}",
                 async ([FromServices] MusicsContext db, int id) =>
                 {
                     var artist = await db.Artists.FirstOrDefaultAsync(a => a.Id == id);
@@ -79,7 +79,7 @@ internal static class ArtistEndpoints
             .WithOpenApi();
 
         app.MapPut(
-                "/Artistas/{id}",
+                "/artistas/{id}",
                 async (
                     [FromServices] MusicsContext db,
                     [FromBody] UpdateArtistRequest request,
