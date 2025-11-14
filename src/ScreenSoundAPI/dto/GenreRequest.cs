@@ -6,9 +6,24 @@ namespace ScreenSoundAPI.dto;
 
 public record DefaultGenreRequest(string Name, string Description)
 {
+    [Obsolete("Use ToGenre instead")]
     public static implicit operator Genre(DefaultGenreRequest request)
     {
         return new Genre { Name = request.Name, Description = request.Description };
+    }
+
+    public Genre ToGenre(MusicsContext db)
+    {
+        Genre? existingGenre = db.Genres.FirstOrDefault(g =>
+            g.Name.ToLower().Equals(this.Name.ToLower())
+        );
+
+        if (existingGenre is not null)
+        {
+            return existingGenre;
+        }
+
+        return new Genre { Name = this.Name, Description = this.Description };
     }
 
     public bool Validate(out string message)

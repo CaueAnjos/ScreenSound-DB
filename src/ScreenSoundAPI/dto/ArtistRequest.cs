@@ -1,4 +1,5 @@
 using System.Text;
+using ScreenSoundCore.Banco;
 using ScreenSoundCore.Modelos;
 
 namespace ScreenSoundAPI.dto;
@@ -10,6 +11,7 @@ public record DefaultArtistRequest(
     ICollection<DefaultMusicRequest>? Musics
 )
 {
+    [Obsolete("Use ToArtist instead")]
     public static implicit operator Artist(DefaultArtistRequest request)
     {
         return new Artist
@@ -18,6 +20,17 @@ public record DefaultArtistRequest(
             Bio = request.Bio,
             PerfilPhoto = request.PerfilPhoto,
             Musics = request.Musics?.Select(r => (Music)r).ToList(),
+        };
+    }
+
+    public Artist ToArtist(MusicsContext db)
+    {
+        return new Artist
+        {
+            Name = this.Name,
+            Bio = this.Bio,
+            PerfilPhoto = this.PerfilPhoto,
+            Musics = this.Musics?.Select(r => r.ToMusic(db)).ToList(),
         };
     }
 
