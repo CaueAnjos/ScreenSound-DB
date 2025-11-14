@@ -23,7 +23,7 @@ internal static class ArtistEndpoints
 
         app.MapGet(
                 "/artistas/{id}",
-                async ([FromServices] MusicsContext db, int id) =>
+                async ([FromServices] MusicsContext db, int id = -1) =>
                 {
                     var artist = await db.Artists.FirstOrDefaultAsync(a => a.Id == id);
                     if (artist is null)
