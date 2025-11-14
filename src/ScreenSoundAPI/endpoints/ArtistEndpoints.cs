@@ -40,7 +40,7 @@ internal static class ArtistEndpoints
                 async ([FromServices] MusicsContext db, [FromBody] DefaultArtistRequest request) =>
                 {
                     bool isValid = request.Validate(out string message);
-                    Artist artistToAdd = request;
+                    Artist artistToAdd = request.ToArtist(db);
                     if (!isValid)
                         return Results.BadRequest(message);
 

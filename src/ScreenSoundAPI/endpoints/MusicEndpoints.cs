@@ -40,7 +40,7 @@ internal static class MusicEndpoints
                 async ([FromServices] MusicsContext db, [FromBody] DefaultMusicRequest request) =>
                 {
                     bool isValid = request.Validate(out string message);
-                    Music musicToAdd = request;
+                    Music musicToAdd = request.ToMusic(db);
                     if (!isValid)
                         return Results.BadRequest(message);
 

@@ -40,7 +40,7 @@ internal static class GenreEndpoints
                 async ([FromServices] MusicsContext db, [FromBody] DefaultGenreRequest request) =>
                 {
                     bool isValid = request.Validate(out string message);
-                    Genre GenreToAdd = request;
+                    Genre GenreToAdd = request.ToGenre(db);
                     if (!isValid)
                         return Results.BadRequest(message);
 
