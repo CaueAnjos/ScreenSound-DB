@@ -54,7 +54,7 @@ internal static class GenreEndpoints
                     await db.Genres.AddAsync(GenreToAdd);
                     await db.SaveChangesAsync();
                     return Results.Created(
-                        $"/Generos/{GenreToAdd}.Id",
+                        $"/Generos/{GenreToAdd.Id}",
                         (DefaultGenreResponse)GenreToAdd
                     );
                 }

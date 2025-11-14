@@ -54,7 +54,7 @@ internal static class MusicEndpoints
                     await db.Musics.AddAsync(musicToAdd);
                     await db.SaveChangesAsync();
                     return Results.Created(
-                        $"/Musicas/{musicToAdd}.Id",
+                        $"/Musicas/{musicToAdd.Id}",
                         (DefaultMusicResponse)musicToAdd
                     );
                 }
