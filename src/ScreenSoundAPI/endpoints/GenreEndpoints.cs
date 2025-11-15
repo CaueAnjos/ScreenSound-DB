@@ -83,7 +83,7 @@ internal static class GenreEndpoints
                 async (
                     [FromServices] MusicsContext db,
                     [FromBody] UpdateGenreRequest request,
-                    int id
+                    int id = -1
                 ) =>
                 {
                     Genre? genre = await db.Genres.FirstOrDefaultAsync(m => m.Id == id);

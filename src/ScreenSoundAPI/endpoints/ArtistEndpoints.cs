@@ -83,7 +83,7 @@ internal static class ArtistEndpoints
                 async (
                     [FromServices] MusicsContext db,
                     [FromBody] UpdateArtistRequest request,
-                    int id
+                    int id = -1
                 ) =>
                 {
                     Artist? artist = await db.Artists.FirstOrDefaultAsync(a => a.Id == id);
