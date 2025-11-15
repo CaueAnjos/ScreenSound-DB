@@ -11,10 +11,8 @@ public class MusicsContext : DbContext
     public DbSet<Music> Musics { get; set; }
     public DbSet<Genre> Genres { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseLazyLoadingProxies();
-    }
+    public MusicsContext(DbContextOptions options)
+        : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
