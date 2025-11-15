@@ -14,7 +14,6 @@
           sdk_9_0
           sdk_8_0
         ];
-      dotnet-runtime = pkgs.dotnetCorePackages.aspnetcore_9_0;
     in {
       devShells.default = pkgs.mkShell {
         packages = with pkgs; [
@@ -31,14 +30,19 @@
         };
       };
 
-      packages.default = pkgs.buildDotnetModule {
-        pname = "ScreenSoundAPI";
-        version = "0.0.0";
-        src = ./.;
-        projectFile = "src/ScreenSoundAPI/ScreenSoundAPI.csproj";
-        inherit dotnet-sdk;
-        inherit dotnet-runtime;
-        nugetDeps = ./deps.json;
-      };
+      packages.default = let
+        dotnet-sdk = pkgs.dotnetCorePackages.sdk_9_0;
+        dotnet-runtime = pkgs.dotnetCorePackages.aspnetcore_9_0;
+      in
+        pkgs.buildDotnetModule
+        {
+          pname = "ScreenSoundAPI";
+          version = "0.0.0";
+          src = ./.;
+          projectFile = "src/ScreenSoundAPI/ScreenSoundAPI.csproj";
+          inherit dotnet-sdk;
+          inherit dotnet-runtime;
+          nugetDeps = ./deps.json;
+        };
     });
 }
