@@ -25,6 +25,9 @@ internal static class GenreEndpoints
                 "/generos/{id}",
                 async ([FromServices] MusicsContext db, int id = -1) =>
                 {
+                    if (id < 0)
+                        return Results.NotFound();
+
                     var genres = await db.Genres.FirstOrDefaultAsync(m => m.Id == id);
                     if (genres is null)
                         return Results.NotFound();
@@ -64,8 +67,11 @@ internal static class GenreEndpoints
 
         app.MapDelete(
                 "/generos/{id}",
-                async ([FromServices] MusicsContext db, int id) =>
+                async ([FromServices] MusicsContext db, int id = -1) =>
                 {
+                    if (id < 0)
+                        return Results.NotFound();
+
                     var genre = await db.Genres.FirstOrDefaultAsync(m => m.Id == id);
                     if (genre is null)
                         return Results.NotFound();
@@ -86,6 +92,9 @@ internal static class GenreEndpoints
                     int id = -1
                 ) =>
                 {
+                    if (id < 0)
+                        return Results.NotFound();
+
                     Genre? genre = await db.Genres.FirstOrDefaultAsync(m => m.Id == id);
                     if (genre is null)
                         return Results.NotFound();

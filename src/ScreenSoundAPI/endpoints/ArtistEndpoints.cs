@@ -25,6 +25,9 @@ internal static class ArtistEndpoints
                 "/artistas/{id}",
                 async ([FromServices] MusicsContext db, int id = -1) =>
                 {
+                    if (id < 0)
+                        return Results.NotFound();
+
                     var artist = await db.Artists.FirstOrDefaultAsync(a => a.Id == id);
                     if (artist is null)
                         return Results.NotFound();
@@ -64,8 +67,11 @@ internal static class ArtistEndpoints
 
         app.MapDelete(
                 "/artistas/{id}",
-                async ([FromServices] MusicsContext db, int id) =>
+                async ([FromServices] MusicsContext db, int id = -1) =>
                 {
+                    if (id < 0)
+                        return Results.NotFound();
+
                     var artist = await db.Artists.FirstOrDefaultAsync(a => a.Id == id);
                     if (artist is null)
                         return Results.NotFound();
@@ -86,6 +92,9 @@ internal static class ArtistEndpoints
                     int id = -1
                 ) =>
                 {
+                    if (id < 0)
+                        return Results.NotFound();
+
                     Artist? artist = await db.Artists.FirstOrDefaultAsync(a => a.Id == id);
 
                     if (artist is null)
