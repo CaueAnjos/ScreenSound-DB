@@ -31,10 +31,11 @@ With nix configured on your machine, just run:
 nix shell \
   nixpkgs#docker_25 \
   nixpkgs#dotnet-ef \
+  nixpkgs#git \
   nixpkgs#bash \
   nixpkgs#curl \
   --command bash -c '
-    curl -fsSL https://github.com/CaueAnjos/ScreenSound-DB/blob/main/db-setup.bash | bash && \
+    curl -fsSL https://raw.githubusercontent.com/CaueAnjos/ScreenSound-DB/v0.0.0/db-setup.bash | bash && \
     nix run github:CaueAnjos/ScreenSound-DB#default
   '
 ```
