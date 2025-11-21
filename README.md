@@ -56,6 +56,11 @@ nix profile add github:CaueAnjos/ScreenSound-DB#default
 With this, now you have the power of ScreenSound-DB on your palm! run it any
 time with `ScreenSoundAPI` on your terminal.
 
+## Exploring API 🧭
+
+Open `localhost:5000/scalar` in your browser and explore! Add music, artists,
+and genres. Mess around with things. If anything breaks, it's a feature 🥶.
+
 ## Uninstalling
 
 There is just two steps: delete ScreenSound-DB directory. If you installed it
