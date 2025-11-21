@@ -50,7 +50,25 @@ the command below, and remember to setup the db with the previous build
 instructions.
 
 ```bash
-nix profile install github:CaueAnjos/ScreenSound-DB#default
+nix profile add github:CaueAnjos/ScreenSound-DB#default
 ```
 
 With this, now you have the power of ScreenSound-DB on your palm!
+
+## Uninstalling
+
+There is just one step: delete ScreenSound-DB directory. If you installed it
+into your system, then there is two steps: delete ScreenSound-DB dir and remove
+ScreenSoundAPI from your system.
+
+1. Delete dir ScreenSound-DB
+
+```bash
+rm -rf ScreenSound-DB
+```
+
+1. Remove ScreenSoundAPI
+
+```bash
+nix profile add github:CaueAnjos/ScreenSound-DB#default
+```
