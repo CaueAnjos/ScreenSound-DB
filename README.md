@@ -53,7 +53,8 @@ instructions.
 nix profile add github:CaueAnjos/ScreenSound-DB#default
 ```
 
-With this, now you have the power of ScreenSound-DB on your palm!
+With this, now you have the power of ScreenSound-DB on your palm! run it any
+time with `ScreenSoundAPI` on your terminal.
 
 ## Uninstalling
 
