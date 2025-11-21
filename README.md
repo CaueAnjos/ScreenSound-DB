@@ -78,5 +78,5 @@ rm -rf ScreenSound-DB
 1. Remove ScreenSoundAPI
 
 ```bash
-nix profile add github:CaueAnjos/ScreenSound-DB#default
+nix profile remove ScreenSound-DB
 ```
