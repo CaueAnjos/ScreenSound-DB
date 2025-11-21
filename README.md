@@ -28,7 +28,7 @@ not, enable them, nerd 🤓! (I know you can do it, rigth?)
 With nix configured on your machine, just run:
 
 ```bash
-nix shell nixpkgs#{docker_25,dotnet-ef,git,bash,curl} --command bash -c '
+nix shell nixpkgs#{docker_25,dotnet-ef,git,bash} --command bash -c '
     git clone https://github.com/CaueAnjos/ScreenSound-DB.git --depth 1 && \
     cd ScreenSound-DB && \
     bash db-setup.bash && \
