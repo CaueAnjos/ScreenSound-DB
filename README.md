@@ -58,9 +58,16 @@ time with `ScreenSoundAPI` on your terminal.
 
 ## Uninstalling
 
-There is just one step: delete ScreenSound-DB directory. If you installed it
+There is just two steps: delete ScreenSound-DB directory. If you installed it
 into your system, then there is two steps: delete ScreenSound-DB dir and remove
 ScreenSoundAPI from your system.
+
+If you want, there is a tird step: delete the db. Just run this command on
+ScreenSound-DB dir:
+
+```bash
+docker compose down
+```
 
 1. Delete dir ScreenSound-DB
 
