@@ -35,7 +35,7 @@
         dotnet-runtime = pkgs.dotnetCorePackages.aspnetcore_9_0;
       in
         pkgs.buildDotnetModule
-        {
+        rec {
           pname = "ScreenSoundAPI";
           version = "0.0.0";
           src = ./.;
@@ -43,6 +43,12 @@
           inherit dotnet-sdk;
           inherit dotnet-runtime;
           nugetDeps = ./deps.json;
+
+          makeWrapperArgs = [
+            "--set"
+            "DOTNET_CONTENTROOT"
+            "${placeholder "out"}/lib/${pname}"
+          ];
         };
     });
 }
