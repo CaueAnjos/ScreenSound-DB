@@ -28,7 +28,7 @@
         trap cleanup EXIT
 
         echo "Starting ${pname} SQL Server container..."
-        ${exe} run --rm -d \
+        ${exe} start ScreenSound-DB || ${exe} run -d \
           --name ScreenSound-DB \
           -p 1433:1433 \
           -e ACCEPT_EULA=Y \
