@@ -28,7 +28,7 @@ not, enable them, nerd 🤓! (I know you can do it, rigth?)
 With nix configured on your machine, just run:
 
 ```bash
-nix run github:CaueAnjos/ScreenSound-DB#default
+nix run github:CaueAnjos/ScreenSound-DB
 ```
 
 This should work just fine if you already have the Docker daemon set up. If it
@@ -45,7 +45,7 @@ the command below, and remember to setup the db with the previous build
 instructions.
 
 ```bash
-nix profile add github:CaueAnjos/ScreenSound-DB#default
+nix profile add github:CaueAnjos/ScreenSound-DB
 ```
 
 With this, now you have the power of ScreenSound-DB on your palm! run it any
@@ -58,15 +58,7 @@ and genres. Mess around with things. If anything breaks, it's a feature 🥶.
 
 ## Uninstalling
 
-There is just two steps: stop ScreenSound-DB container. If you installed it into
-your system, then there is two steps: stop ScreenSound-DB container and remove
-ScreenSoundAPI from your system.
-
-1. stop ScreenSound-DB
-
-```bash
-docker stop ScreenSound-DB
-```
+There is just one step: remove ScreenSound-DB of your system.
 
 1. Remove ScreenSoundAPI
 
