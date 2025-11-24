@@ -75,7 +75,7 @@
           sleep 10
           echo "SQL Server is ready!"
           echo "Starting API..."
-          exec ${self.packages.${system}.default}/bin/ScreenSoundAPI
+          ${self.packages.${system}.default}/bin/ScreenSoundAPI
         ''}/bin/run";
       };
     });
