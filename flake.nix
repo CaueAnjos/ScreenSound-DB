@@ -93,5 +93,23 @@
           ${self.packages.${system}.api}/bin/ScreenSoundAPI
         '';
       };
+
+      packages.podmanSupport = pkgs.writeShellApplication {
+        name = "run";
+        runtimeInputs = [pkgs.podman];
+        text = ''
+          set -e
+
+          ${container-cmd {
+            pkg = pkgs.podman;
+            pname = "podman";
+          }}
+
+          sleep 10
+          echo "SQL Server is ready!"
+          echo "Starting API..."
+          ${self.packages.${system}.api}/bin/ScreenSoundAPI
+        '';
+      };
     });
 }
