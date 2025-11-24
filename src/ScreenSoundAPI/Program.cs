@@ -25,6 +25,13 @@ builder.Services.AddDbContext<MusicsContext>(options =>
 
 var app = builder.Build();
 
+// NOTE: this aotomaticaly apply migrations to db
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<MusicsContext>();
+    await db.Database.MigrateAsync();
+}
+
 // Configure the HTTP request pipeline.
 app.MapScalarApiReference();
 app.MapOpenApi();
