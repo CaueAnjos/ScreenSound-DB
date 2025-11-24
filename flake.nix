@@ -53,7 +53,9 @@
           ];
         };
 
-      apps.default = {
+      apps.default = self.apps.${system}.dockerSupport;
+
+      apps.dockerSupport = {
         type = "app";
         program = "${pkgs.writeShellScriptBin "run" ''
           set -e
