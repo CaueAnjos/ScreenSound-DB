@@ -17,10 +17,8 @@
         ];
       docker = pkgs.docker_25;
 
-      container-cmd = {
-        pkg,
-        pname,
-      }: let
+      container-cmd = {pkg}: let
+        pname = pkg.pname;
         exe = "${pkg}/bin/${pname}";
       in ''
         cleanup() {
@@ -84,7 +82,6 @@
 
           ${container-cmd {
             pkg = docker;
-            pname = "docker";
           }}
 
           sleep 10
@@ -102,7 +99,6 @@
 
           ${container-cmd {
             pkg = pkgs.podman;
-            pname = "podman";
           }}
 
           sleep 10
