@@ -53,7 +53,7 @@
         };
       };
 
-      packages.default = let
+      packages.api = let
         dotnet-sdk = pkgs.dotnetCorePackages.sdk_9_0;
         dotnet-runtime = pkgs.dotnetCorePackages.aspnetcore_9_0;
       in
@@ -89,7 +89,7 @@
           sleep 10
           echo "SQL Server is ready!"
           echo "Starting API..."
-          ${self.packages.${system}.default}/bin/ScreenSoundAPI
+          ${self.packages.${system}.api}/bin/ScreenSoundAPI
         ''}/bin/run";
       };
     });
