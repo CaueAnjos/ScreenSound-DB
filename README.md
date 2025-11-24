@@ -28,12 +28,7 @@ not, enable them, nerd 🤓! (I know you can do it, rigth?)
 With nix configured on your machine, just run:
 
 ```bash
-nix shell nixpkgs#{docker_25,dotnet-sdk_9,dotnet-ef,git,bash} --command bash -c '
-    git clone https://github.com/CaueAnjos/ScreenSound-DB.git --depth 1 && \
-    cd ScreenSound-DB && \
-    bash db-setup.bash && \
-    nix run github:CaueAnjos/ScreenSound-DB#default
-  '
+nix run github:CaueAnjos/ScreenSound-DB#default
 ```
 
 This should work just fine if you already have the Docker daemon set up. If it
@@ -56,6 +51,17 @@ nix profile add github:CaueAnjos/ScreenSound-DB#default
 With this, now you have the power of ScreenSound-DB on your palm! run it any
 time with `ScreenSoundAPI` on your terminal.
 
+To setup the db, run:
+
+```bash
+docker run --rm -d \
+  --name ScreenSound-DB \
+  -p 1433:1433 \
+  -e ACCEPT_EULA=Y \
+  -e MSSQL_SA_PASSWORD='[Senha123]' \
+  mcr.microsoft.com/mssql/server:2022-latest
+```
+
 ## Exploring API 🧭
 
 Open `localhost:5000/scalar` in your browser and explore! Add music, artists,
@@ -63,21 +69,14 @@ and genres. Mess around with things. If anything breaks, it's a feature 🥶.
 
 ## Uninstalling
 
-There is just two steps: delete ScreenSound-DB directory. If you installed it
-into your system, then there is two steps: delete ScreenSound-DB dir and remove
+There is just two steps: stop ScreenSound-DB container. If you installed it into
+your system, then there is two steps: stop ScreenSound-DB container and remove
 ScreenSoundAPI from your system.
 
-If you want, there is a tird step: delete the db. Just run this command on
-ScreenSound-DB dir:
+1. stop ScreenSound-DB
 
 ```bash
-docker compose down
-```
-
-1. Delete dir ScreenSound-DB
-
-```bash
-rm -rf ScreenSound-DB
+docker stop ScreenSound-DB
 ```
 
 1. Remove ScreenSoundAPI
