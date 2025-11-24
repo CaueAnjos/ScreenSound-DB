@@ -33,8 +33,13 @@ nix run github:CaueAnjos/ScreenSound-DB
 
 This should work just fine if you already have the Docker daemon set up. If it
 doesn’t, go set up Docker on your machine. With Podman, this process would
-potentially be simpler because it doesn't need a daemon. But, for now, this is
-not automated 😢.
+potentially be simpler because it doesn't need a daemon.
+
+If you want to use podman try this:
+
+```bash
+nix run github:CaueAnjos/ScreenSound-DB#podmanSupport
+```
 
 ## Installation
 
