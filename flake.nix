@@ -74,11 +74,12 @@
           ];
         };
 
-      apps.default = self.apps.${system}.dockerSupport;
+      packages.default = self.packages.${system}.dockerSupport;
 
-      apps.dockerSupport = {
-        type = "app";
-        program = "${pkgs.writeShellScriptBin "run" ''
+      packages.dockerSupport = pkgs.writeShellApplication {
+        name = "run";
+        runtimeInputs = [docker];
+        text = ''
           set -e
 
           ${container-cmd {
@@ -90,7 +91,7 @@
           echo "SQL Server is ready!"
           echo "Starting API..."
           ${self.packages.${system}.api}/bin/ScreenSoundAPI
-        ''}/bin/run";
+        '';
       };
     });
 }
