@@ -49,18 +49,7 @@ nix profile add github:CaueAnjos/ScreenSound-DB#default
 ```
 
 With this, now you have the power of ScreenSound-DB on your palm! run it any
-time with `ScreenSoundAPI` on your terminal.
-
-To setup the db, run:
-
-```bash
-docker run --rm -d \
-  --name ScreenSound-DB \
-  -p 1433:1433 \
-  -e ACCEPT_EULA=Y \
-  -e MSSQL_SA_PASSWORD='[Senha123]' \
-  mcr.microsoft.com/mssql/server:2022-latest
-```
+time with `screensound-api` on your terminal.
 
 ## Exploring API 🧭
 
