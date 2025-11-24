@@ -15,6 +15,7 @@
           sdk_9_0
           sdk_8_0
         ];
+      docker = pkgs.docker_25;
     in {
       devShells.default = pkgs.mkShell {
         packages = with pkgs; [
@@ -23,7 +24,7 @@
 
           openssl
           dotnet-ef
-          docker_25
+          docker
         ];
 
         env = {
@@ -59,12 +60,12 @@
 
           cleanup() {
             echo "Stopping database container..."
-            docker stop ScreenSound-DB 2>/dev/null || true
+            ${docker}/bin/docker stop ScreenSound-DB 2>/dev/null || true
           }
           trap cleanup EXIT
 
           echo "Starting SQL Server container..."
-          docker run --rm -d \
+          ${docker}/bin/docker run --rm -d \
             --name ScreenSound-DB \
             -p 1433:1433 \
             -e ACCEPT_EULA=Y \
