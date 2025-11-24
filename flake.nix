@@ -78,8 +78,6 @@
         name = "screensound-api";
         runtimeInputs = [docker];
         text = ''
-          set -e
-
           ${container-cmd {
             pkg = docker;
           }}
@@ -95,8 +93,6 @@
         name = "run";
         runtimeInputs = [pkgs.podman];
         text = ''
-          set -e
-
           ${container-cmd {
             pkg = pkgs.podman;
           }}
