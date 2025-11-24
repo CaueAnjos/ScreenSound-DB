@@ -41,8 +41,7 @@ not automated 😢.
 The only official way to install it is through **Nix**. I know, its a bit clunky
 for a c# project, but I promise: **Nix** is cool 😎. To install, simply add this
 repo to your flake inputs and call the default package. Or, even simpler, run
-the command below, and remember to setup the db with the previous build
-instructions.
+the command below:
 
 ```bash
 nix profile add github:CaueAnjos/ScreenSound-DB
