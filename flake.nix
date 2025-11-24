@@ -75,7 +75,7 @@
       packages.default = self.packages.${system}.dockerSupport;
 
       packages.dockerSupport = pkgs.writeShellApplication {
-        name = "run";
+        name = "screensound-api";
         runtimeInputs = [docker];
         text = ''
           set -e
