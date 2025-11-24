@@ -43,7 +43,7 @@
 
           openssl
           dotnet-ef
-          docker
+          podman
         ];
 
         env = {
