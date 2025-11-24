@@ -16,6 +16,27 @@
           sdk_8_0
         ];
       docker = pkgs.docker_25;
+
+      container-cmd = {
+        pkg,
+        pname,
+      }: let
+        exe = "${pkg}/bin/${pname}";
+      in ''
+        cleanup() {
+          echo "Stopping ${pname} database container..."
+          ${exe} stop ScreenSound-DB 2>/dev/null || true
+        }
+        trap cleanup EXIT
+
+        echo "Starting ${pname} SQL Server container..."
+        ${exe} run --rm -d \
+          --name ScreenSound-DB \
+          -p 1433:1433 \
+          -e ACCEPT_EULA=Y \
+          -e MSSQL_SA_PASSWORD='[Senha123]' \
+          mcr.microsoft.com/mssql/server:2022-latest
+      '';
     in {
       devShells.default = pkgs.mkShell {
         packages = with pkgs; [
@@ -60,19 +81,10 @@
         program = "${pkgs.writeShellScriptBin "run" ''
           set -e
 
-          cleanup() {
-            echo "Stopping database container..."
-            ${docker}/bin/docker stop ScreenSound-DB 2>/dev/null || true
-          }
-          trap cleanup EXIT
-
-          echo "Starting SQL Server container..."
-          ${docker}/bin/docker run --rm -d \
-            --name ScreenSound-DB \
-            -p 1433:1433 \
-            -e ACCEPT_EULA=Y \
-            -e MSSQL_SA_PASSWORD='[Senha123]' \
-            mcr.microsoft.com/mssql/server:2022-latest
+          ${container-cmd {
+            pkg = docker;
+            pname = "docker";
+          }}
 
           sleep 10
           echo "SQL Server is ready!"
